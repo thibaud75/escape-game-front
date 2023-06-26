@@ -11,7 +11,7 @@ function App() {
     <>
       <Nav/>
       <div>
-        <h1 className='title'>Bienvenue sur l'escape game des fou furieux</h1>
+        <h1 className='title'>dsrghidfgihux</h1>
       </div>
       <Footer/>
     </>
