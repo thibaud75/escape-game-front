@@ -12,7 +12,7 @@ function App() {
       <span>escape game</span>
       <span>connexion</span>
     </header>
-      <h1>Bienvenue sur l'escape game des fou furieux</h1>
+      <h1>Bienvenu sur l'escape game des fou furieux</h1>
     </>
   )
 }
