@@ -2,6 +2,7 @@ body{
     display : flex;
     flex-direction: column;
     box-sizing: border-box;
+    font-family: Phantomsans, sans-serif;
 }
 
 .connexion{
