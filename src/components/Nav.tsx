@@ -9,10 +9,7 @@ const name = 'blabla'
 function onConnexion(){
     if (isConnect == true){
         setIsConnect(false)
-    }else{
-        alert(`la page de connexion n'est pas encore disponible`)
     }
-
 }
 
 function onHistory(){
@@ -20,7 +17,7 @@ function onHistory(){
 
 }
 
-const [isConnect, setIsConnect] = useState(true)
+const [isConnect, setIsConnect] = useState(false)
 
     return(
 
@@ -32,11 +29,8 @@ const [isConnect, setIsConnect] = useState(true)
                     {isConnect == true  && 'Historique'}
                 </span>
                 <span id="connexion" onClick={()=>{onConnexion()}}> 
-                    {isConnect == true  ?'Déconnexion' : 'Connexion'}
+                    {isConnect == true  ?'Déconnexion' : <Link to="/auth">Connexion</Link>}
                 </span>
-                <div>
-                    <Link to="/auth">Blabla</Link>
-                </div>
             </div>
 
         </header>
