@@ -51,7 +51,7 @@ function Auth() {
     <>
       <Nav />
       <div>
-        <h1 className="inscription">Inscrpition</h1>
+        <h1 className="inscription">Inscription</h1>
         <form onSubmit={(e) => getData(e)}>
           <input type="text" placeholder="email" name="email"></input>
           <input type="text" placeholder="mdp" name="password"></input>

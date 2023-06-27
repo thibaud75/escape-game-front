@@ -62,7 +62,7 @@ function Auth() {
           ></input>
           <button type="submit">Submit</button>
         </form>
-        <Link to="/singup">Inscription</Link>
+        <Link to="/signup">Inscription</Link>
       </div>
       <Footer />
     </>
