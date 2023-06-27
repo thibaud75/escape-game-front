@@ -15,7 +15,7 @@ interface Game {
 const Booking = () => {
   const { id } = useParams<{ id: string }>(); // Récupère l'ID depuis l'URL
   const [game, setGame] = useState<Game | null>(null);
-  const [participants, setParticipants] = useState<number | null>(null);
+  const [participants, setParticipants] = useState<number>(0);
 
   useEffect(() => {
     fetch("http://localhost:3000/games/" + id)
@@ -67,7 +67,7 @@ const Booking = () => {
                 </option>
               ))}
             </select>
-            <form onSubmit={(e) => e}>{participants && gameForms}</form>
+            <form onSubmit={(e) => e}>{gameForms}</form>
             <button type="submit"></button>
           </div>
         )}
