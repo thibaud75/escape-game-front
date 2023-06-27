@@ -2,7 +2,6 @@ body{
  margin: 0px;
  display: flex;
  flex-direction: column;
- height: 800px;
  justify-content: space-between;
 }
 
@@ -13,6 +12,7 @@ body{
   height: 100%;
   align-items: center;
 }
+
 header{
   display: flex;
   justify-content: space-between;
@@ -27,9 +27,12 @@ header>span{
 }
 
 footer{
-  height: 250px;
+  height: 100px;
   background-color: rgb(92, 92, 210);
   width: 100%;
+  position: absolute;
+  bottom: 0px;
+  text-align: center;
 }
 
 #connexion:hover{

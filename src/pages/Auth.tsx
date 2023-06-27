@@ -3,6 +3,7 @@ import "./Auth.css";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import { HiOutlineLogin } from "react-icons/hi";
+import { Outlet, Link } from "react-router-dom";
 
 function Auth() {
   const getData = (e: React.FormEvent<HTMLFormElement>) => {
@@ -44,14 +45,24 @@ function Auth() {
     <>
       <Nav />
       <div>
-        <h1 className="connexion">
-          connexion <HiOutlineLogin />
-        </h1>
+        <h1 className="connexion">connexion</h1>
+        <HiOutlineLogin />
         <form onSubmit={(e) => getData(e)}>
-          <input type="text" placeholder="email" name="email"></input>
-          <input type="text" placeholder="mdp" name="password"></input>
+          <input
+            type="text"
+            placeholder="email"
+            name="email"
+            className="inputEmail"
+          ></input>
+          <input
+            type="text"
+            placeholder="mdp"
+            name="password"
+            className="inputPassword"
+          ></input>
           <button type="submit">Submit</button>
         </form>
+        <Link to="/singup">Inscription</Link>
       </div>
       <Footer />
     </>

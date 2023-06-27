@@ -1,13 +1,27 @@
 body{
     display : flex;
     flex-direction: column;
+    box-sizing: border-box;
 }
 
 .connexion{
-
+    vertical-align: middle;
 }
 
 form{
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+
+.inputEmail{
+    margin: 15px;
+}
+
+.inputPassword{
+    margin: 15px;
+}
+
+button{
+    width: 10em;
 }
