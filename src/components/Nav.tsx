@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Auth from '../pages/Auth'
 import { Outlet, Link } from "react-router-dom";
+import {Route, useLocation } from 'react-router-dom'
 
 export default function Nav() {
 
@@ -17,6 +18,9 @@ function onHistory(){
 
 }
 
+
+    
+
 const [isConnect, setIsConnect] = useState(false)
 
     return(
@@ -28,11 +32,10 @@ const [isConnect, setIsConnect] = useState(false)
                 <span id="history" onClick={()=>{onHistory()}}> 
                     {isConnect == true  && 'Historique'}
                 </span>
-                <span id="connexion" onClick={()=>{onConnexion()}}> 
+               {useLocation().pathname !='/auth' && <span id="connexion" onClick={()=>{onConnexion()}}> 
                     {isConnect == true  ?'Déconnexion' : <Link to="/auth">Connexion</Link>}
-                </span>
+                </span>}
             </div>
-
         </header>
     )
 
