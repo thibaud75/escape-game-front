@@ -27,13 +27,15 @@ function App() {
       <Nav />
       <div>
         <h1 className="title">Bienvenue sur l'escape game des fou furieux</h1>
-        <div>
+        <div className="flex-layout">
           {game.map((elem) => {
             return (
               <>
-                <img src={elem.image} alt={elem.name} />
-                <h2 className="titre">{elem.name}</h2>
-                <p className="description">{elem.description}</p>
+                <div className="div-game">
+                  <img src={elem.image} alt={elem.name} />
+                  <h2 className="titre">{elem.name}</h2>
+                  <p className="description">{elem.description}</p>
+                </div>
               </>
             );
           })}
