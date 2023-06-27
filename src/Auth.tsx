@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import Nav from './components/nav'
+import Nav from './components/Nav'
 import Footer from './components/Footer'
 
 
@@ -12,6 +12,8 @@ function App() {
       <Nav/>
       <div>
         <h1 className='title'>dsrghidfgihux</h1>
+
+        
       </div>
       <Footer/>
     </>
