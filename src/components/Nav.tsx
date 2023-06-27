@@ -20,7 +20,9 @@ export default function Nav() {
 
   return (
     <header>
-      <span>Escape Game</span>
+      <Link to="/">
+        <span>Escape Game</span>
+      </Link>
       {isConnect == true && <h1>Bonjour {name}</h1>}
       <div className="droite">
         <span

@@ -1,0 +1,12 @@
+.list-day {
+  display: flex;
+  list-style-type: none;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.morning,
+.afternoon {
+  border: 1px solid black;
+  margin: 0;
+}

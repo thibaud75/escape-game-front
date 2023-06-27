@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
+import { Outlet, Link } from "react-router-dom";
 
 interface Game {
   name: string;
   description: string;
   image: string;
+  id: string;
 }
 
 function App() {
@@ -32,7 +34,9 @@ function App() {
             return (
               <>
                 <div className="div-game">
-                  <img src={elem.image} alt={elem.name} />
+                  <Link to={`/game/${elem.id}`} className="game-link">
+                    <img src={elem.image} alt={elem.name} />
+                  </Link>
                   <h2 className="titre">{elem.name}</h2>
                   <p className="description">{elem.description}</p>
                 </div>
