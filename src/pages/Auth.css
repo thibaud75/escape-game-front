@@ -1,0 +1,13 @@
+body{
+    display : flex;
+    flex-direction: column;
+}
+
+.connexion{
+
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
