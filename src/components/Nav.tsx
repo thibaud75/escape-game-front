@@ -34,7 +34,9 @@ const [isConnect, setIsConnect] = useState(true)
                 <span id="connexion" onClick={()=>{onConnexion()}}> 
                     {isConnect == true  ?'Déconnexion' : 'Connexion'}
                 </span>
-                <Link to="/Auth">Blabla</Link>
+                <div>
+                    <Link to="/auth">Blabla</Link>
+                </div>
             </div>
 
         </header>
