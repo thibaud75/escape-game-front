@@ -1,5 +1,6 @@
 import { useState } from "react"
-import Auth from '../Auth'
+import Auth from '../pages/Auth'
+import { Outlet, Link } from "react-router-dom";
 
 export default function Nav() {
 
@@ -33,6 +34,7 @@ const [isConnect, setIsConnect] = useState(true)
                 <span id="connexion" onClick={()=>{onConnexion()}}> 
                     {isConnect == true  ?'Déconnexion' : 'Connexion'}
                 </span>
+                <Link to="/Auth">Blabla</Link>
             </div>
 
         </header>

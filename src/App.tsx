@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
+import {Route, Routes} from "react-router-dom";
+import Auth from "./pages/Auth"
+
 
 
 
@@ -29,7 +32,6 @@ const getData = (e:React.FormEvent<HTMLFormElement>) => {
   callApi(data)
 }
 
-
 function callApi(login:{}){
   fetch(`http://localhost:3000/auth/login`, {
     method : 'POST',
@@ -48,12 +50,6 @@ function callApi(login:{}){
   })
 }
 
-// useEffect(()=>{
-//   callApi()
-// },[])
-
-
-
   return (
     <>
       <Nav/>
@@ -68,6 +64,11 @@ function callApi(login:{}){
 
       </div>
       <Footer/>
+
+      <Routes>
+        <Route path="/" element={<App />}/>
+        <Route path="auth" element={<Auth />} />
+      </Routes>
     </>
   )
 }
