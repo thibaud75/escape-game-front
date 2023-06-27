@@ -46,7 +46,7 @@ function Auth() {
       <Nav />
       <div>
         <h1 className="connexion">connexion</h1>
-        <HiOutlineLogin />
+        {/* <HiOutlineLogin /> */}
         <form onSubmit={(e) => getData(e)}>
           <input
             type="text"
@@ -60,9 +60,13 @@ function Auth() {
             name="password"
             className="inputPassword"
           ></input>
-          <button type="submit">Submit</button>
+          <button type="submit" className="button-64">
+            <span>Submit</span>
+          </button>
         </form>
-        <Link to="/signup">Inscription</Link>
+        <Link to="/signup" className="signInLink">
+          Inscription
+        </Link>
       </div>
       <Footer />
     </>
