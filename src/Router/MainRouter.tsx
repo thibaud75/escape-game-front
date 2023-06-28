@@ -14,7 +14,7 @@ export default function MainRouter() {
         <Route path="/auth" element={<Auth />} />
         <Route path="/signup" element={<Inscription />} />
         <Route path="/game/:id" element={<Game />} />
-        <Route path="/game/:id/booking/:id" element={<Booking />} />
+        <Route path="/game/:id/booking/:dateId" element={<Booking />} />
       </Routes>
     </BrowserRouter>
   );

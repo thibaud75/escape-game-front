@@ -20,7 +20,7 @@ const Game = () => {
       .then((response) => response.json())
       .then((data) => {
         setGame(data);
-        console.log(data);
+        // console.log(data);
       });
   }, []);
 

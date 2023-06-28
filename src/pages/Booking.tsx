@@ -13,17 +13,23 @@ interface Game {
 }
 
 const Booking = () => {
-  const { id } = useParams<{ id: string }>(); // Récupère l'ID depuis l'URL
+  const { id: gameId } = useParams<{ id: string }>();
+  const bookingId = window.location.pathname.split("/")[4];
+  const url = decodeURIComponent(bookingId);
+  const formattedString =
+    url.charAt(0).toUpperCase() + url.slice(1).toLowerCase();
+  console.log(formattedString);
+
   const [game, setGame] = useState<Game | null>(null);
   const [participants, setParticipants] = useState<number>(0);
 
   useEffect(() => {
-    fetch("http://localhost:3000/games/" + id)
+    fetch(`http://localhost:3000/games/${gameId}`)
       .then((response) => response.json())
       .then((data) => {
         setGame(data);
       });
-  }, []);
+  }, [gameId]);
 
   const handleParticipantsChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -31,6 +37,40 @@ const Booking = () => {
     const value = parseInt(event.target.value);
     setParticipants(value);
     console.log(value);
+  };
+
+  const handleSubmit = () => {
+    // Construire le corps de la requête
+    const body = {
+      dispo: {
+        gameId: gameId,
+        disponibility: [
+          {
+            date: formattedString,
+          },
+        ],
+        userId:
+          "pour l'instant on push ça mais plus tard on aura le userId qu'on stockera dans le LS",
+      },
+    };
+
+    // Envoyer la requête POST
+    fetch("http://localhost:3000/disponibility/reserveform", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Traiter la réponse de la requête
+        console.log(data);
+      })
+      .catch((error) => {
+        // Gérer les erreurs
+        console.error(error);
+      });
   };
 
   const gameForms = [];
@@ -44,7 +84,7 @@ const Booking = () => {
     }
   }
 
-  console.log(game);
+  // console.log(game);
 
   return (
     <div>
@@ -57,9 +97,10 @@ const Booking = () => {
               Vous allez réserver la salle {game.name}
             </p>
             <p className="reserv-capacity">
-              Le nombre de participants doit être compris entre
-              {" " + game.capacity[0]} et
-              {" " + game.capacity[game.capacity.length - 1]}
+              Le nombre de participants doit être compris entre{" "}
+              {` ${game.capacity[0]} et ${
+                game.capacity[game.capacity.length - 1]
+              }`}
             </p>
             <select
               value={participants ?? ""}
@@ -72,8 +113,10 @@ const Booking = () => {
                 </option>
               ))}
             </select>
-            <form onSubmit={(e) => e}>{gameForms}</form>
-            <button type="submit"></button>
+            <form onSubmit={(e) => e.preventDefault()}>{gameForms}</form>
+            <button type="submit" onClick={handleSubmit}>
+              Réserver
+            </button>
           </div>
         )}
       </div>
