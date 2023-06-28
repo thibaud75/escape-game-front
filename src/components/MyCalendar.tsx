@@ -1,6 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./MyCalendar.css";
 import { Outlet, Link } from "react-router-dom";
+
+interface CreneauxHorraire {
+  date: string;
+  id: number;
+}
 
 const MyCalendar = () => {
   const getFutureDates = () => {
@@ -36,12 +41,16 @@ const MyCalendar = () => {
   });
   console.log(tableOfAllDate);
 
- 
-  let tableOfDate = "";
+  const [tableOfDate, setTableOfDate] =  useState<CreneauxHorraire>();
 
-  const targetDate = (e: React.MouseEvent<HTMLParagraphElement, MouseEvent>,date: Date,time: string) => {
+  const targetDate = (
+    e: React.MouseEvent<HTMLParagraphElement, MouseEvent>,
+    date: Date,
+    time: string
+  ) => {
     e.preventDefault();
-    tableOfDate = formatDate(date) + " " + time
+    setTableOfDate({ date: formatDate(date) + " " + time, id: 23 });      
+    }
     console.log(tableOfDate);
   };
 
@@ -52,16 +61,16 @@ const MyCalendar = () => {
         {futureDates.map((date, index) => (
           <li key={index}>
             <p className="date">{formatDate(date)}</p>
-            <Link to="booking" className="signInLink">
-            <p 
+
+            <p
               onClick={(e) => {
-                targetDate(e, date, "MATIN")
+                targetDate(e, date, "MATIN");
               }}
               className="morning"
             >
               MATIN
             </p>
-        </Link>
+
             <p
               onClick={(e) => {
                 targetDate(e, date, "APREM");

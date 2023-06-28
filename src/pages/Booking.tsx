@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import GameForm from "../components/GameForm";
-import MyCalendar from "../components/MyCalendar";
 
 interface Game {
   name: string;
@@ -45,7 +44,7 @@ const Booking = () => {
     }
   }
 
-  console.log(game)
+  console.log(game);
 
   return (
     <div>
