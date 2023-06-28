@@ -13,7 +13,7 @@ interface Game {
 
 const Game = () => {
   const { id } = useParams<{ id: string }>(); // Récupère l'ID depuis l'URL
-  const [game, setGame] = useState<Game[]>([]);
+  const [game, setGame] = useState<Game>(); // Ne pas laisser les parenthèses vides
 
   useEffect(() => {
     fetch("http://localhost:3000/games/" + id)

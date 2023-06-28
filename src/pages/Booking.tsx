@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import GameForm from "../components/GameForm";
+import MyCalendar from "../components/MyCalendar";
 
 interface Game {
   name: string;
@@ -35,11 +36,13 @@ const Booking = () => {
 
   const gameForms = [];
   for (let i = 0; i < participants; i++) {
-    gameForms.push(
-      <div key={i}>
-        <GameForm />
-      </div>
-    );
+    if (!isNaN(participants)) {
+      gameForms.push(
+        <div key={i}>
+          <GameForm />
+        </div>
+      );
+    }
   }
 
   return (
@@ -53,8 +56,9 @@ const Booking = () => {
               Vous allez réserver la salle {game.name}
             </p>
             <p className="reserv-capacity">
-              Le nombre de participants doit être compris entre{" "}
-              {game.capacity[0]} et {game.capacity[game.capacity.length - 1]}
+              Le nombre de participants doit être compris entre
+              {" " + game.capacity[0]} et
+              {" " + game.capacity[game.capacity.length - 1]}
             </p>
             <select
               value={participants ?? ""}

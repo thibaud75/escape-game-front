@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./MyCalendar.css";
 
 const MyCalendar = () => {
@@ -27,6 +27,34 @@ const MyCalendar = () => {
   };
 
   const futureDates = getFutureDates();
+
+  useEffect(() => {
+    saveDataToDatabase();
+  }, []);
+
+  const saveDataToDatabase = () => {
+    const data = {
+      dates: futureDates,
+    };
+
+    fetch("http://localhost:3000/games/date", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log("Données enregistrées avec succès !");
+        } else {
+          throw new Error("Erreur lors de l'enregistrement des données");
+        }
+      })
+      .catch((error) => {
+        console.error("Erreur lors de l'enregistrement des données :", error);
+      });
+  };
 
   return (
     <div>
