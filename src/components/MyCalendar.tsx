@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "./MyCalendar.css";
+import { Outlet, Link } from "react-router-dom";
 
 const MyCalendar = () => {
   const getFutureDates = () => {
@@ -35,52 +36,12 @@ const MyCalendar = () => {
   });
   console.log(tableOfAllDate);
 
-  useEffect(() => {
-    saveDataToDatabase();
-  }, []);
+ 
+  let tableOfDate = "";
 
-  const saveDataToDatabase = () => {
-    const data = {
-      dates: tableOfAllDate,
-    };
-
-    fetch("http://localhost:3000/games/date", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        if (response.ok) {
-          console.log("Données enregistrées avec succès !");
-        } else {
-          throw new Error("Erreur lors de l'enregistrement des données");
-        }
-      })
-      .catch((error) => {
-        console.error("Erreur lors de l'enregistrement des données :", error);
-      });
-  };
-
-  let tableOfDate: string[] = [];
-
-  const targetDate = (
-    e: React.MouseEvent<HTMLParagraphElement, MouseEvent>,
-    date: Date,
-    time: string
-  ) => {
+  const targetDate = (e: React.MouseEvent<HTMLParagraphElement, MouseEvent>,date: Date,time: string) => {
     e.preventDefault();
-
-    let indexOfTable = tableOfDate.indexOf(formatDate(date) + " " + time);
-    console.log(indexOfTable);
-
-    if (indexOfTable >= 0) {
-      tableOfDate.splice(indexOfTable, 1);
-    } else {
-      tableOfDate.push(formatDate(date) + " " + time);
-    }
-
+    tableOfDate = formatDate(date) + " " + time
     console.log(tableOfDate);
   };
 
@@ -91,14 +52,16 @@ const MyCalendar = () => {
         {futureDates.map((date, index) => (
           <li key={index}>
             <p className="date">{formatDate(date)}</p>
-            <p
+            <Link to="booking" className="signInLink">
+            <p 
               onClick={(e) => {
-                targetDate(e, date, "MATIN");
+                targetDate(e, date, "MATIN")
               }}
               className="morning"
             >
               MATIN
             </p>
+        </Link>
             <p
               onClick={(e) => {
                 targetDate(e, date, "APREM");
