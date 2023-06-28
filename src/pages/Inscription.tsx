@@ -2,6 +2,7 @@ import { useState } from "react";
 // import './App.css'
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
+import { v4 as uuidv4 } from 'uuid';
 
 function Auth() {
   const getData = (e: React.FormEvent<HTMLFormElement>) => {
@@ -26,6 +27,7 @@ function Auth() {
       password: newPassword,
       name: newName,
       lastname: newLastname,
+      id : uuidv4()
     };
 
     callApi(data);

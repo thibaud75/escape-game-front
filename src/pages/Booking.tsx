@@ -45,6 +45,8 @@ const Booking = () => {
     }
   }
 
+  console.log(game)
+
   return (
     <div>
       <Nav />

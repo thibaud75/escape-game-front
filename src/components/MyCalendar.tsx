@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import "./MyCalendar.css";
 
 const MyCalendar = () => {
-
   const getFutureDates = () => {
     const today = new Date();
     const futureDates = [];
@@ -29,17 +28,15 @@ const MyCalendar = () => {
 
   const futureDates = getFutureDates();
 
-  let tableOfAllDate:string[]= []
-    futureDates.forEach(elem=> {
-      tableOfAllDate.push(formatDate(elem)+' MATIN')
-      tableOfAllDate.push(formatDate(elem)+' APREM')
-      })
-    console.log(tableOfAllDate)
+  let tableOfAllDate: string[] = [];
+  futureDates.forEach((elem) => {
+    tableOfAllDate.push(formatDate(elem) + " MATIN");
+    tableOfAllDate.push(formatDate(elem) + " APREM");
+  });
+  console.log(tableOfAllDate);
 
   useEffect(() => {
-    
     saveDataToDatabase();
-
   }, []);
 
   const saveDataToDatabase = () => {
@@ -66,26 +63,27 @@ const MyCalendar = () => {
       });
   };
 
-  let tableOfDate:string[] = []
- 
+  let tableOfDate: string[] = [];
 
-  const targetDate = (e:React.MouseEvent<HTMLParagraphElement, MouseEvent>, date:Date, time:string) =>{
-    e.preventDefault()
-    
-    let indexOfTable = tableOfDate.indexOf(formatDate(date)+' '+time)
-    console.log(indexOfTable)
-    
-    if (indexOfTable>=0){
-      tableOfDate.splice(indexOfTable, 1)
-    }else{
-      tableOfDate.push(formatDate(date)+' '+time)
+  const targetDate = (
+    e: React.MouseEvent<HTMLParagraphElement, MouseEvent>,
+    date: Date,
+    time: string
+  ) => {
+    e.preventDefault();
+
+    let indexOfTable = tableOfDate.indexOf(formatDate(date) + " " + time);
+    console.log(indexOfTable);
+
+    if (indexOfTable >= 0) {
+      tableOfDate.splice(indexOfTable, 1);
+    } else {
+      tableOfDate.push(formatDate(date) + " " + time);
     }
-    
-    console.log(tableOfDate)
-  }
 
-  
-  
+    console.log(tableOfDate);
+  };
+
   return (
     <div>
       <h2>Disponibilités</h2>
@@ -93,12 +91,22 @@ const MyCalendar = () => {
         {futureDates.map((date, index) => (
           <li key={index}>
             <p className="date">{formatDate(date)}</p>
-            <p onClick={(e)=>{
-              targetDate(e, date, "MATIN")
-            }} className="morning">MATIN</p>
-            <p onClick={(e)=>{
-              targetDate(e, date, "APREM")
-            }}className="afternoon">APREM</p>
+            <p
+              onClick={(e) => {
+                targetDate(e, date, "MATIN");
+              }}
+              className="morning"
+            >
+              MATIN
+            </p>
+            <p
+              onClick={(e) => {
+                targetDate(e, date, "APREM");
+              }}
+              className="afternoon"
+            >
+              APREM
+            </p>
           </li>
         ))}
       </ul>
@@ -107,4 +115,3 @@ const MyCalendar = () => {
 };
 
 export default MyCalendar;
-
