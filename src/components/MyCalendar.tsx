@@ -41,7 +41,7 @@ const MyCalendar = () => {
   });
   console.log(tableOfAllDate);
 
-  const [tableOfDate, setTableOfDate] =  useState<CreneauxHorraire>();
+  const [tableOfDate, setTableOfDate] = useState<CreneauxHorraire[]>([]);
 
   const targetDate = (
     e: React.MouseEvent<HTMLParagraphElement, MouseEvent>,
@@ -49,10 +49,22 @@ const MyCalendar = () => {
     time: string
   ) => {
     e.preventDefault();
-    setTableOfDate({ date: formatDate(date) + " " + time, id: 23 });      
-    }
-    console.log(tableOfDate);
+    setTableOfDate((prevTable) => {
+      const selectedDateTime = formatDate(date) + " " + time;
+      const index = prevTable.findIndex(
+        (item) => item.date === selectedDateTime
+      );
+      if (index !== -1) {
+        // Supprimer le créneau horaire s'il est déjà sélectionné
+        return prevTable.filter((item) => item.date !== selectedDateTime);
+      } else {
+        // Ajouter le créneau horaire s'il n'est pas déjà sélectionné
+        return [...prevTable, { date: selectedDateTime, id: tableOfAllDate.indexOf(formatDate(date)) }];
+      }
+    });
   };
+
+  console.log(tableOfDate);
 
   return (
     <div>
@@ -61,7 +73,6 @@ const MyCalendar = () => {
         {futureDates.map((date, index) => (
           <li key={index}>
             <p className="date">{formatDate(date)}</p>
-
             <p
               onClick={(e) => {
                 targetDate(e, date, "MATIN");
@@ -70,7 +81,6 @@ const MyCalendar = () => {
             >
               MATIN
             </p>
-
             <p
               onClick={(e) => {
                 targetDate(e, date, "APREM");
