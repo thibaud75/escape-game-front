@@ -6,7 +6,7 @@ import { Outlet, Link } from "react-router-dom";
 
 interface Game {
   name: string;
-  description: string;
+  petiteDesc: string;
   image: string;
   id: string;
 }
@@ -38,7 +38,7 @@ function App() {
                     <img src={elem.image} alt={elem.name} />
                   </Link>
                   <h2 className="titre">{elem.name}</h2>
-                  <p className="description">{elem.description}</p>
+                  <p className="description">{elem.petiteDesc}</p>
                 </div>
               </>
             );
