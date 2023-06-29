@@ -1,20 +1,29 @@
-let saveToken = (token:string) => {
-    localStorage.setItem('token', token)
-}
+let saveToken = (token: string) => {
+  localStorage.setItem("token", token);
+};
 
-let logout =() =>{
-    localStorage.removeItem('token')
-}
+let logout = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("userId");
+  localStorage.removeItem("userName");
+};
 
-let isLogged = () =>{
-    let token = localStorage.getItem('token')
-    return !!token
-} 
+let isLogged = () => {
+  let token = localStorage.getItem("token");
+  return !!token;
+};
 
-let saveUserId = (userId:string) =>{
-localStorage.setItem('userId', userId)
-}
+let saveUserId = (userId: string) => {
+  localStorage.setItem("userId", userId);
+};
+let saveUserName = (userName: string) => {
+  localStorage.setItem("userName", userName);
+};
 
 export const accountService = {
-    saveToken, logout, isLogged, saveUserId
-}
+  saveToken,
+  logout,
+  isLogged,
+  saveUserId,
+  saveUserName,
+};

@@ -51,10 +51,10 @@ const Booking = () => {
             date: formattedString,
           },
         ],
-        userId: localStorage.getItem('userId')
+        userId: localStorage.getItem("userId"),
       },
     };
-    
+
     // Envoyer la requête POST
     fetch("http://localhost:3000/disponibility/reserveform", {
       method: "POST",
@@ -95,7 +95,7 @@ const Booking = () => {
           <div className="div2">
             <img src={game.image} alt={game.name} />
             <p className="reserv-date">
-              Vous allez réserver la salle {game.name}
+              Vous allez réserver la salle {game.name} le {formattedString}
             </p>
             <p className="reserv-capacity">
               Le nombre de participants doit être compris entre{" "}
