@@ -30,10 +30,10 @@ function App() {
       <div>
         <h1 className="title">Bienvenue sur l'escape game des fou furieux</h1>
         <div className="flex-layout">
-          {game.map((elem) => {
+          {game.map((elem, index) => {
             return (
               <>
-                <div className="div-game">
+                <div className="div-game" key={index}>
                   <Link to={`/game/${elem.id}`} className="game-link">
                     <img src={elem.image} alt={elem.name} />
                   </Link>
