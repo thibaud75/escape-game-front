@@ -24,6 +24,21 @@ const Booking = () => {
 
   const [game, setGame] = useState<Game | null>(null);
   const [participants, setParticipants] = useState<number>(0);
+  const [participantData, setParticipantData] = useState<any[]>([]);
+
+
+  const handleParticipantInputChange = (index: number, data: ParticipantData) => {
+    setParticipantData((prevData) => {
+      const newData = [...prevData];
+      newData[index] = {
+        ...newData[index],
+        ...data,
+      };
+      return newData;
+    });
+  };
+  
+  console.log(participantData)
 
   useEffect(() => {
     fetch(`http://localhost:3000/games/${gameId}`)
@@ -42,13 +57,16 @@ const Booking = () => {
   };
 
   const handleSubmit = () => {
-    // Construire le corps de la requête
+   
+
     const body = {
       dispo: {
         gameId: gameId,
         disponibility: [
           {
             date: formattedString,
+            users: participantData,
+            
           },
         ],
         userId: localStorage.getItem("userId"),
@@ -79,13 +97,12 @@ const Booking = () => {
     if (!isNaN(participants)) {
       gameForms.push(
         <div key={i}>
-          <GameForm />
+          <GameForm onInputChange={(data) => handleParticipantInputChange(i, data)} />
         </div>
       );
     }
   }
 
-  // console.log(game);
 
   return (
     <div>

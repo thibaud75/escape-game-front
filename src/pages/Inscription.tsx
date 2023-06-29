@@ -3,8 +3,11 @@ import "./Inscription.css";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from "react-router-dom";
+
 
 function Auth() {
+  const navigate = useNavigate()
   const getData = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -47,6 +50,7 @@ function Auth() {
       })
       .then((data) => {
         console.log(data);
+        navigate("/auth")
       });
   }
   return (
