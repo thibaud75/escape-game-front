@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEventHandler } from "react";
 import { useParams } from "react-router-dom";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import GameForm from "../components/GameForm";
 import "./Booking.css";
+import { accountService } from "../_services/account.service";
 
 interface Game {
   name: string;
@@ -50,11 +51,10 @@ const Booking = () => {
             date: formattedString,
           },
         ],
-        userId:
-          "pour l'instant on push ça mais plus tard on aura le userId qu'on stockera dans le LS",
+        userId: localStorage.getItem('userId')
       },
     };
-
+    
     // Envoyer la requête POST
     fetch("http://localhost:3000/disponibility/reserveform", {
       method: "POST",

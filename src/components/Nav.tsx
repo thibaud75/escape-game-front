@@ -3,6 +3,7 @@ import Auth from "../pages/Auth";
 import { Outlet, Link } from "react-router-dom";
 import { Route, useLocation } from "react-router-dom";
 
+
 export default function Nav() {
   const name = "blabla";
   // object.name

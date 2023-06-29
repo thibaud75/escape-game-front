@@ -41,6 +41,7 @@ const MyCalendar = () => {
   const handleDateClick = (date: string) => {
     setSelectedDate((prevDate) => (prevDate === date ? "" : date));
   };
+  console.log(selectedDate);
 
   return (
     <div>

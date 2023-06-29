@@ -3,12 +3,22 @@ import "./Auth.css";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import { HiOutlineLogin } from "react-icons/hi";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate} from "react-router-dom";
+import { accountService } from "../_services/account.service";
+
+
+
+  
 
 function Auth() {
+
+  const [redirectToHome, setRedirectToHome] = useState(false);
+  const navigate = useNavigate()
+
   const getData = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    
     const formData = new FormData(e.currentTarget);
 
     const email = formData.get("email");
@@ -39,7 +49,12 @@ function Auth() {
       })
       .then((data) => {
         console.log(data);
-      });
+        accountService.saveToken(data.token)
+        accountService.saveUserId(data.userId)
+        console.log('test')
+        navigate("/")
+      })
+      
   }
   return (
     <>
