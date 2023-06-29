@@ -44,28 +44,28 @@ function Auth() {
   return (
     <>
       <Nav />
-      <div>
+      <div className="formConnect">
         <h1 className="connexion">connexion</h1>
         {/* <HiOutlineLogin /> */}
         <form onSubmit={(e) => getData(e)}>
           <input
             type="text"
-            placeholder="email"
+            placeholder="e-mail"
             name="email"
             className="inputEmail"
           ></input>
           <input
             type="text"
-            placeholder="mdp"
+            placeholder="Mot de passe"
             name="password"
             className="inputPassword"
           ></input>
-          <button type="submit" className="button-64">
+          <button type="submit" className="buttonSubmit">
             <span>Submit</span>
           </button>
         </form>
-        <Link to="/signup" className="signInLink">
-          Inscription
+        <Link to="/signup">
+          <button className="signInBtn">Inscription</button>
         </Link>
       </div>
       <Footer />

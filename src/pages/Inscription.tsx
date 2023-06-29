@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import './App.css'
+import "./Inscription.css";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import { v4 as uuidv4 } from 'uuid';
@@ -52,14 +52,36 @@ function Auth() {
   return (
     <>
       <Nav />
-      <div>
-        <h1 className="inscription">Inscription</h1>
+      <div className="FormInscription">
+        <h1>Inscription</h1>
         <form onSubmit={(e) => getData(e)}>
-          <input type="text" placeholder="email" name="email"></input>
-          <input type="text" placeholder="mdp" name="password"></input>
-          <input type="text" placeholder="name" name="name"></input>
-          <input type="text" placeholder="lastname" name="lastname"></input>
-          <button type="submit"></button>
+          <input
+            className="inputName"
+            type="text"
+            placeholder="e-mail"
+            name="email"
+          ></input>
+          <input
+            className="inputName"
+            type="text"
+            placeholder="Mot de passe"
+            name="password"
+          ></input>
+          <input
+            className="inputName"
+            type="text"
+            placeholder="Prenom"
+            name="name"
+          ></input>
+          <input
+            className="inputName"
+            type="text"
+            placeholder="Nom"
+            name="lastname"
+          ></input>
+          <button type="submit" className="buttonSubmit">
+            <span>Submit</span>
+          </button>
         </form>
       </div>
       <Footer />

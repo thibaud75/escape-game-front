@@ -21,7 +21,10 @@ export default function Nav() {
   return (
     <header>
       <Link to="/">
-        <span>Escape Game</span>
+        <img
+          className="logo"
+          src="https://upload.wikimedia.org/wikipedia/commons/5/54/Logo-escapegame-blanc.png"
+        />
       </Link>
       {isConnect == true && <h1>Bonjour {name}</h1>}
       <div className="droite">
@@ -31,10 +34,11 @@ export default function Nav() {
             onHistory();
           }}
         >
-          {isConnect == true && "Historique"}
+          {isConnect == true && <button className="navBtn">Historique</button>}
         </span>
         {useLocation().pathname != "/auth" && (
-          <span
+          <button
+            className="navBtn"
             id="connexion"
             onClick={() => {
               onConnexion();
@@ -45,7 +49,7 @@ export default function Nav() {
             ) : (
               <Link to="/auth">Connexion</Link>
             )}
-          </span>
+          </button>
         )}
       </div>
     </header>
