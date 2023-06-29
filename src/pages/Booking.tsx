@@ -115,8 +115,12 @@ const Booking = () => {
               ))}
             </select>
             <form onSubmit={(e) => e.preventDefault()}>{gameForms}</form>
-            <button type="submit" onClick={handleSubmit}>
-              Réserver
+            <button
+              className="buttonSubmit"
+              type="submit"
+              onClick={handleSubmit}
+            >
+              <span>Réserver</span>
             </button>
           </div>
         )}

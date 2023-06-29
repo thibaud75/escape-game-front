@@ -2,10 +2,16 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    text-align: center;
     width: 70%;
+    text-align: center;
 }
 
-.div2{
+/* .div2{
     width: 100%;
+} */
+
+select{
+    height: 3em;
+    border-radius: .5em;
+    margin-bottom: 1em;
 }
