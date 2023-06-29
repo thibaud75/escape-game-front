@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import GameForm from "../components/GameForm";
+import "./Booking.css";
 
 interface Game {
   name: string;
@@ -32,7 +33,7 @@ const Booking = () => {
   }, [gameId]);
 
   const handleParticipantsChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     const value = parseInt(event.target.value);
     setParticipants(value);
@@ -91,7 +92,7 @@ const Booking = () => {
       <Nav />
       <div className="flex-layout">
         {game && (
-          <div className="div-game">
+          <div className="div2">
             <img src={game.image} alt={game.name} />
             <p className="reserv-date">
               Vous allez réserver la salle {game.name}

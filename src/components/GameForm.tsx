@@ -1,9 +1,13 @@
+import "./GameForm.css";
+
 const GameForm = () => {
   return (
     <>
-      <input type="text" placeholder="Prénom"></input>
-      <input type="text" placeholder="Nom"></input>
-      <input type="date"></input>
+      <div className="PlayerPlusDate">
+        <input type="text" placeholder="Prénom"></input>
+        <input type="text" placeholder="Nom"></input>
+        <input type="date"></input>
+      </div>
     </>
   );
 };
