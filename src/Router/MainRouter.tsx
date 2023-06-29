@@ -4,6 +4,7 @@ import Auth from "../pages/Auth";
 import Inscription from "../pages/Inscription";
 import Game from "../pages/Game";
 import Booking from "../pages/Booking";
+import History from "../pages/History";
 import App from "../App";
 
 export default function MainRouter() {
@@ -15,6 +16,7 @@ export default function MainRouter() {
         <Route path="/signup" element={<Inscription />} />
         <Route path="/game/:id" element={<Game />} />
         <Route path="/game/:id/booking/:dateId" element={<Booking />} />
+        <Route path="/history" element={<History />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,17 +1,19 @@
 import { useState } from "react";
 import Auth from "../pages/Auth";
 import { Outlet, Link } from "react-router-dom";
-import { Route, useLocation } from "react-router-dom";
+import { Route, useLocation, useNavigate } from "react-router-dom";
 import { accountService } from "../_services/account.service";
 
 export default function Nav() {
+  const navigate = useNavigate();
+
   function onConnexion() {
     accountService.logout();
     setIsConnect(false);
   }
 
   function onHistory() {
-    alert(`la page d'historique n'est pas encore disponible`);
+    navigate("/history");
   }
 
   const [isConnect, setIsConnect] = useState(accountService.isLogged());
