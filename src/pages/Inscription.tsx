@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./Inscription.css";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 function Auth() {
   const getData = (e: React.FormEvent<HTMLFormElement>) => {
@@ -27,7 +27,7 @@ function Auth() {
       password: newPassword,
       name: newName,
       lastname: newLastname,
-      id : uuidv4()
+      id: uuidv4(),
     };
 
     callApi(data);
@@ -52,38 +52,38 @@ function Auth() {
   return (
     <>
       <Nav />
-      <div className="FormInscription">
+      <form className="FormInscription" onSubmit={(e) => getData(e)}>
         <h1>Inscription</h1>
-        <form onSubmit={(e) => getData(e)}>
-          <input
-            className="inputName"
-            type="text"
-            placeholder="e-mail"
-            name="email"
-          ></input>
-          <input
-            className="inputName"
-            type="text"
-            placeholder="Mot de passe"
-            name="password"
-          ></input>
-          <input
-            className="inputName"
-            type="text"
-            placeholder="Prenom"
-            name="name"
-          ></input>
-          <input
-            className="inputName"
-            type="text"
-            placeholder="Nom"
-            name="lastname"
-          ></input>
+        <input
+          className="inputName"
+          type="text"
+          placeholder="e-mail"
+          name="email"
+        ></input>
+        <input
+          className="inputName"
+          type="text"
+          placeholder="Mot de passe"
+          name="password"
+        ></input>
+        <input
+          className="inputName"
+          type="text"
+          placeholder="Prenom"
+          name="name"
+        ></input>
+        <input
+          className="inputName"
+          type="text"
+          placeholder="Nom"
+          name="lastname"
+        ></input>
+        <div>
           <button type="submit" className="buttonSubmit">
-            <span>Submit</span>
+            <span>Inscription</span>
           </button>
-        </form>
-      </div>
+        </div>
+      </form>
       <Footer />
     </>
   );

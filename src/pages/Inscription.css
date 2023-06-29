@@ -7,19 +7,15 @@ body{
 }
 
 .FormInscription{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: blue;
   color: white;
   padding: 1em;
   border-radius: 0.5em;
   width: 50vw;
-  text-align: center;
   box-shadow: 10px 10px 8px teal;
-}
-
-form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .inputName{

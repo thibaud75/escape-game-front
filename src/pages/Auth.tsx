@@ -59,30 +59,31 @@ function Auth() {
   return (
     <>
       <Nav />
-      <div className="formConnect">
-        <h1 className="connexion">connexion</h1>
-        {/* <HiOutlineLogin /> */}
-        <form onSubmit={(e) => getData(e)}>
-          <input
-            type="text"
-            placeholder="e-mail"
-            name="email"
-            className="inputEmail"
-          ></input>
-          <input
-            type="text"
-            placeholder="Mot de passe"
-            name="password"
-            className="inputPassword"
-          ></input>
+
+      {/* <HiOutlineLogin /> */}
+      <form className="formConnect" onSubmit={(e) => getData(e)}>
+        <h1>connexion</h1>
+        <input
+          type="text"
+          placeholder="e-mail"
+          name="email"
+          className="inputEmail"
+        ></input>
+        <input
+          type="text"
+          placeholder="Mot de passe"
+          name="password"
+          className="inputPassword"
+        ></input>
+        <div>
           <button type="submit" className="buttonSubmit">
-            <span>Submit</span>
+            <span>connexion</span>
           </button>
-        </form>
+        </div>
         <Link to="/signup">
-          <button className="signInBtn">Inscription</button>
+          <button className="signInBtn">Vous n'avez pas de compte ?</button>
         </Link>
-      </div>
+      </form>
       <Footer />
     </>
   );
