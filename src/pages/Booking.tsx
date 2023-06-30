@@ -26,8 +26,10 @@ const Booking = () => {
   const [participants, setParticipants] = useState<number>(0);
   const [participantData, setParticipantData] = useState<any[]>([]);
 
-
-  const handleParticipantInputChange = (index: number, data: ParticipantData) => {
+  const handleParticipantInputChange = (
+    index: number,
+    data: ParticipantData
+  ) => {
     setParticipantData((prevData) => {
       const newData = [...prevData];
       newData[index] = {
@@ -37,8 +39,8 @@ const Booking = () => {
       return newData;
     });
   };
-  
-  console.log(participantData)
+
+  console.log(participantData);
 
   useEffect(() => {
     fetch(`http://localhost:3000/games/${gameId}`)
@@ -57,8 +59,6 @@ const Booking = () => {
   };
 
   const handleSubmit = () => {
-   
-
     const body = {
       dispo: {
         gameId: gameId,
@@ -66,7 +66,6 @@ const Booking = () => {
           {
             date: formattedString,
             users: participantData,
-            
           },
         ],
         userId: localStorage.getItem("userId"),
@@ -97,12 +96,13 @@ const Booking = () => {
     if (!isNaN(participants)) {
       gameForms.push(
         <div key={i}>
-          <GameForm onInputChange={(data) => handleParticipantInputChange(i, data)} />
+          <GameForm
+            onInputChange={(data) => handleParticipantInputChange(i, data)}
+          />
         </div>
       );
     }
   }
-
 
   return (
     <div>
@@ -110,16 +110,18 @@ const Booking = () => {
       <div className="flex-layout">
         {game && (
           <div className="div2">
-            <img src={game.image} alt={game.name} />
-            <p className="reserv-date">
-              Vous allez réserver la salle {game.name} le {formattedString}
-            </p>
-            <p className="reserv-capacity">
-              Le nombre de participants doit être compris entre{" "}
-              {` ${game.capacity[0]} et ${
-                game.capacity[game.capacity.length - 1]
-              }`}
-            </p>
+            <div className="textDescBooking">
+              <img src={game.image} alt={game.name} />
+              <p className="reserv-date">
+                Vous allez réserver la salle {game.name} le {formattedString}
+              </p>
+              <p className="reserv-capacity">
+                Le nombre de participants doit être compris entre{" "}
+                {` ${game.capacity[0]} et ${
+                  game.capacity[game.capacity.length - 1]
+                }`}
+              </p>
+            </div>
             <select
               value={participants ?? ""}
               onChange={handleParticipantsChange}
@@ -132,13 +134,15 @@ const Booking = () => {
               ))}
             </select>
             <form onSubmit={(e) => e.preventDefault()}>{gameForms}</form>
-            <button
-              className="buttonSubmit"
-              type="submit"
-              onClick={handleSubmit}
-            >
-              <span>Réserver</span>
-            </button>
+            <div>
+              <button
+                className="buttonSubmit"
+                type="submit"
+                onClick={handleSubmit}
+              >
+                <span>Réserver</span>
+              </button>
+            </div>
           </div>
         )}
       </div>
