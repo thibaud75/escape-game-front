@@ -36,11 +36,13 @@ function Auth() {
       id: uuidv4(),
     };
 
-    if (emailRegex.test(newEmail)){
+    if ((emailRegex.test(newEmail)) && (newPassword.length > 0) && (newName.length > 0) && (newLastname.length > 0) ) {
       callApi(data);
     }
-    else{
+    else if(!emailRegex.test(newEmail)){
       alert("veuillez entrer une adresse mail valide")
+    }else{
+      alert("Veuillez remplir tous les champs")
     }
   };
 
