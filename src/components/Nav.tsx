@@ -45,7 +45,7 @@ export default function Nav() {
             }}
           >
             {isConnect == true ? (
-              "Déconnexion"
+              <Link to="/">Déconnexion</Link>
             ) : (
               <Link to="/auth">Connexion</Link>
             )}

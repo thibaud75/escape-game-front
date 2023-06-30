@@ -1,5 +1,5 @@
 import { useState, useEffect, ChangeEventHandler } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import GameForm from "../components/GameForm";
@@ -15,6 +15,7 @@ interface Game {
 }
 
 const Booking = () => {
+  const navigate = useNavigate()
   const { id: gameId } = useParams<{ id: string }>();
   const bookingId = window.location.pathname.split("/")[4];
   const url = decodeURIComponent(bookingId);
@@ -84,6 +85,8 @@ const Booking = () => {
       .then((data) => {
         // Traiter la réponse de la requête
         console.log(data);
+        navigate('/succesOrder')
+
       })
       .catch((error) => {
         // Gérer les erreurs
