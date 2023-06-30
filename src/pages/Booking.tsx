@@ -142,7 +142,11 @@ const Booking = () => {
               <button
                 className="buttonSubmit"
                 type="submit"
-                onClick={handleSubmit}
+                onClick={() => {
+                  accountService.isLogged()
+                    ? handleSubmit()
+                    : alert("Veuillez vous connecter!");
+                }}
               >
                 <span>Réserver</span>
               </button>
