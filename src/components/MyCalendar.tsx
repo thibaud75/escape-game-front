@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./MyCalendar.css";
-import { Outlet, Link, useParams } from "react-router-dom";
+import { Outlet, Link, useParams, useNavigate } from "react-router-dom";
+import { accountService } from "../_services/account.service";
 
 interface CreneauxHorraire {
   date: string;
@@ -9,6 +10,7 @@ interface CreneauxHorraire {
 
 const MyCalendar = () => {
   const { id } = useParams<{ id: string }>(); // Récupère l'ID depuis l'URL
+  const navigate = useNavigate();
 
   const getFutureDates = () => {
     const today = new Date();
@@ -117,9 +119,17 @@ const MyCalendar = () => {
         })}
       </ul>
       {selectedDate && (
-        <Link to={`/game/${id}/booking/${selectedDate}`}>
-          <button>Réserver</button>
-        </Link>
+        <button
+          onClick={() => {
+            if (accountService.isLogged()) {
+              navigate(`/game/${id}/booking/${selectedDate}`);
+            } else {
+              alert("Veuillez vous connecter avant de réserver une salle !");
+            }
+          }}
+        >
+          Réserver
+        </button>
       )}
     </div>
   );
