@@ -27,15 +27,15 @@ function App() {
   return (
     <>
       <Nav />
-      <div>
-        <h1 className="title">Bienvenue sur l'escape game des fou furieux</h1>
-        <div className="flex-layout">
+      <div className="page">
+        <h1 className="title">Escape Game</h1>
+        <div className="gamesAll">
           {game.map((elem, index) => {
             return (
               <>
                 <div className="div-game" key={index}>
                   <Link to={`/game/${elem.id}`} className="game-link">
-                    <img src={elem.image} alt={elem.name} />
+                    <img className="imgApp" src={elem.image} alt={elem.name} />
                   </Link>
                   <h2 className="titre">{elem.name}</h2>
                   <p className="description">{elem.petiteDesc}</p>

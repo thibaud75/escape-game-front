@@ -30,16 +30,16 @@ export default function Footer() {
           {/* </div>
 
       <div className="reseaux"> */}
-          <Link to="https://fr-fr.facebook.com/">
+          <Link to="https://fr-fr.facebook.com/" target="blank">
             <button className="navBtn">Facebook</button>
           </Link>
-          <Link to="https://twitter.com/?lang=fr">
+          <Link to="https://twitter.com/?lang=fr" target="blank">
             <button className="navBtn">Twitter</button>
           </Link>
-          <Link to="https://www.instagram.com/">
+          <Link to="https://www.instagram.com/" target="blank">
             <button className="navBtn">Instagram</button>
           </Link>
-          <Link to="https://www.youtube.com/watch?v=uYZzMPsm6c4">
+          <Link to="https://www.youtube.com/watch?v=uYZzMPsm6c4" target="blank">
             <button className="navBtn">Youtube</button>
           </Link>
         </div>
