@@ -13,8 +13,11 @@ function Auth() {
 
     const formData = new FormData(e.currentTarget);
 
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
     const email = formData.get("email");
     let newEmail = email as string;
+    
 
     const password = formData.get("password");
     let newPassword = password as string;
@@ -33,7 +36,12 @@ function Auth() {
       id: uuidv4(),
     };
 
-    callApi(data);
+    if (emailRegex.test(newEmail)){
+      callApi(data);
+    }
+    else{
+      alert("veuillez entrer une adresse mail valide")
+    }
   };
 
   function callApi(login: {}) {
