@@ -135,7 +135,9 @@ const Booking = () => {
                 </option>
               ))}
             </select>
-            <form onSubmit={(e) => e.preventDefault()}>{gameForms}</form>
+            <form className="formBooking" onSubmit={(e) => e.preventDefault()}>
+              {gameForms}
+            </form>
             <div>
               <button
                 className="buttonSubmit"

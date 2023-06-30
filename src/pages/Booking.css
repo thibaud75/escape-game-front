@@ -8,6 +8,7 @@
 
 .imgBooking{
     width: 50%;
+    border-radius: .5em;
 }
 
 .div2{
@@ -17,9 +18,12 @@
     align-items: center;
 }
 
-.textDescBooking{
-
-}
+  input{
+    height: 3em;
+    border: none;
+    border-radius: .5em;
+    box-shadow:  5px 5px 15px rgb(2, 2, 156),
+               -5px -5px 15px rgb(0, 0, 218);}
 
 select{
     height: 3em;
