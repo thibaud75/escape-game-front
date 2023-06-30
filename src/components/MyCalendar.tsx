@@ -38,7 +38,20 @@ const MyCalendar = () => {
 
   const [selectedDate, setSelectedDate] = useState<string>("");
   const [arrayPush, setArrayPush] = useState<string[]>([]);
-  const [isDisable, setIsDisable] = useState<boolean>(false);
+  const [buttonStates, setButtonStates] = useState<boolean[]>(
+    Array(14).fill(false)
+  );
+
+  let tableOfAllDate: string[] = [];
+  futureDates.forEach((elem) => {
+    const formattedDate = formatDate(elem);
+    const capitalizedDay =
+      formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+    tableOfAllDate.push(capitalizedDay + " matin");
+    tableOfAllDate.push(capitalizedDay + " aprem");
+  });
+
+  console.log(tableOfAllDate);
 
   const handleDateClick = (date: string) => {
     setSelectedDate((prevDate) => (prevDate === date ? "" : date));
@@ -56,15 +69,12 @@ const MyCalendar = () => {
       });
   }, []);
 
-  let tableOfAllDate: string[] = [];
-  futureDates.forEach((elem) => {
-    const formattedDate = formatDate(elem);
-    const capitalizedDay =
-      formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
-    tableOfAllDate.push(capitalizedDay + " matin");
-    tableOfAllDate.push(capitalizedDay + " aprem");
-  });
-  // console.log(tableOfAllDate);
+  useEffect(() => {
+    const initialButtonStates = tableOfAllDate.map((date) =>
+      arrayPush.includes(date)
+    );
+    setButtonStates(initialButtonStates);
+  }, [arrayPush]);
 
   console.log(arrayPush);
 
@@ -79,14 +89,17 @@ const MyCalendar = () => {
           const isMorningSelected = selectedDate === morningTime;
           const isAfternoonSelected = selectedDate === afternoonTime;
 
+          // Attribue true ou false en fonction de l'id du boutton
+          const initialMorningState = buttonStates[index * 2];
+          const initialAfternoonState = buttonStates[index * 2 + 1];
+
           return (
             <li key={index}>
               <p className="date">{formattedDate}</p>
               <button
                 onClick={() => handleDateClick(morningTime)}
                 className={isMorningSelected ? "morning selected" : "morning"}
-                disabled={isDisable}
-                id="Vendredi 30 juin 2023 matin"
+                disabled={initialMorningState}
               >
                 MATIN
               </button>
@@ -95,7 +108,7 @@ const MyCalendar = () => {
                 className={
                   isAfternoonSelected ? "afternoon selected" : "afternoon"
                 }
-                disabled={isDisable}
+                disabled={initialAfternoonState}
               >
                 APREM
               </button>
