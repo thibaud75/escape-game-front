@@ -74,6 +74,8 @@ header>span{
 }
 
 footer{
+  display: flex;
+  justify-content: center;
   margin-top: 2em;
   background-color: darkblue;
   width: 100%;
@@ -85,9 +87,9 @@ footer{
 .footerContent{
   display: flex;
   flex-direction: row;
-  width: 90%;
   justify-content: space-between;
   height: fit-content;
+  padding: 1em;
 }
 
 .aPropos{

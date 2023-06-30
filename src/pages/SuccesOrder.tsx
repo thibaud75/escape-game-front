@@ -1,6 +1,7 @@
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
+import "./SuccesOrder.css";
 // import { useNavigate } from "react-router-dom";
 import { accountService } from "../_services/account.service";
 
@@ -28,6 +29,7 @@ function SuccesOrder() {
       .then((response) => response.json())
       .then((data) => {
         console.log(gameId);
+        console.log(data.name);
         setGameName(data.name);
       });
   }

@@ -25,7 +25,7 @@ export default function Footer() {
             l'aventure <strong>Escape Game</strong> ! Sinon il existe des escape
             games moins poussés et moins amusants tels que le{" "}
             <strong>peu importe</strong> et{" "}
-            <strong>l'escape du dictateur</strong> mais on vous aura prevenus !
+            <strong>l'escape du dictateur</strong>. On vous aura prevenus !
           </p>
           {/* </div>
 
