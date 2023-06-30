@@ -46,11 +46,17 @@ function SuccesOrder() {
     <>
       <Nav />
       {accountService.isLogged() ? (
-        <p>
-          Félicitation {user}, notre equipe vous attend le {date} dans notre
-          salle {gameName} pour l'experience la plus démentielle de votre vie !
-          ps : N'oubliez pas de laissez votre peur à la maison{" "}
-        </p>
+        <div className="pagePsartek">
+          <div className="psartek">
+            <h1>Félicitations {user}</h1>
+            <p>
+              Notre equipe vous attend le <strong>{date}</strong> dans notre
+              salle <strong>{gameName} </strong>
+              pour l'experience la plus démentielle de votre vie !
+            </p>
+            <p>PS : N'oubliez pas de laisser votre peur à la maison </p>
+          </div>
+        </div>
       ) : (
         <p>Page introuvable</p>
       )}
