@@ -51,9 +51,9 @@ const History = () => {
       "u" ||
       "y"
     ) {
-      return <h2>Reservations d'{localStorage.getItem("userName")}</h2>;
+      return <h2 className="h2resa">Reservations d'{localStorage.getItem("userName")}</h2>;
     } else {
-      return <h2>Reservations de {localStorage.getItem("userName")}</h2>;
+      return <h2 className="h2resa">Reservations de {localStorage.getItem("userName")}</h2>;
     }
   }
 

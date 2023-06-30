@@ -1,5 +1,4 @@
 .reservAll{
-    background-color:blue;
     padding: 1em;
     border-radius: .5em;
     color: white;
@@ -9,7 +8,12 @@
     box-shadow: 10px 10px 8px teal;
 }
 
+.h2resa{
+    color:black
+}
+
 .reservOne{
+    background-color: blue;
     margin-bottom: 1em;
     padding-left: 1em;
     border-radius: .5em;
