@@ -30,17 +30,16 @@ body{
   flex-direction: row;
   flex-wrap: wrap;
   align-content: center;
+  justify-content: center;
+}
 
-  position: relative;
-  left: 10%;
-  margin: 0;
-  padding: 0;
-  opacity: 0;
-  transition : all 2.5s ease;
+.div-game:hover{
+  background-color: rgb(219, 121, 2);
 }
 
 .div-game{
   background-color: orange;
+  transition : all .7s ease;
   border-radius: .5em;
   width: 25%;
   padding: 1em;
