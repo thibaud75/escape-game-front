@@ -43,11 +43,17 @@ function Auth() {
       })
       .then((data) => {
         console.log(data);
-        accountService.saveToken(data.token);
-        accountService.saveUserId(data.userId);
-        accountService.saveUserName(data.userName);
-        console.log("test");
-        navigate("/");
+        if (data.message != "Paire login/mot de passe incorrecte"){
+
+          accountService.saveToken(data.token);
+          accountService.saveUserId(data.userId);
+          accountService.saveUserName(data.userName);
+          console.log("test");
+          navigate("/");
+        }
+        else{
+          alert("L'identifiant ou le mot de passe est incorrecte")
+        }
       });
   }
   return (
