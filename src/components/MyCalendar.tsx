@@ -37,11 +37,36 @@ const MyCalendar = () => {
   const futureDates = getFutureDates();
 
   const [selectedDate, setSelectedDate] = useState<string>("");
+  const [arrayPush, setArrayPush] = useState<string[]>([]);
+  const [isDisable, setIsDisable] = useState<boolean>(false);
 
   const handleDateClick = (date: string) => {
     setSelectedDate((prevDate) => (prevDate === date ? "" : date));
   };
-  console.log(selectedDate);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/disponibility/getdates/" + id)
+      .then((response) => response.json())
+      .then((data) => {
+        const dates = data.map((element: any) => element.disponibility[0].date);
+        setArrayPush(dates);
+      })
+      .catch((error) => {
+        console.log("Erreur de date", error);
+      });
+  }, []);
+
+  let tableOfAllDate: string[] = [];
+  futureDates.forEach((elem) => {
+    const formattedDate = formatDate(elem);
+    const capitalizedDay =
+      formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+    tableOfAllDate.push(capitalizedDay + " matin");
+    tableOfAllDate.push(capitalizedDay + " aprem");
+  });
+  // console.log(tableOfAllDate);
+
+  console.log(arrayPush);
 
   return (
     <div>
@@ -57,20 +82,23 @@ const MyCalendar = () => {
           return (
             <li key={index}>
               <p className="date">{formattedDate}</p>
-              <p
+              <button
                 onClick={() => handleDateClick(morningTime)}
                 className={isMorningSelected ? "morning selected" : "morning"}
+                disabled={isDisable}
+                id="Vendredi 30 juin 2023 matin"
               >
                 MATIN
-              </p>
-              <p
+              </button>
+              <button
                 onClick={() => handleDateClick(afternoonTime)}
                 className={
                   isAfternoonSelected ? "afternoon selected" : "afternoon"
                 }
+                disabled={isDisable}
               >
                 APREM
-              </p>
+              </button>
             </li>
           );
         })}

@@ -24,16 +24,6 @@ const Game = () => {
       });
   }, []);
 
-  useEffect(() => {
-    fetch("http://localhost:3000/disponibility/getdates/" + id)
-      .then((response) => response.json())
-      .then((data) => {
-        data.forEach((element) => {
-          console.log(element.disponibility[0].date);
-        });
-      });
-  }, []);
-
   return (
     <div>
       <Nav />
