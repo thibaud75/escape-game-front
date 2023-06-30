@@ -15,7 +15,7 @@ interface Game {
 }
 
 const Booking = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { id: gameId } = useParams<{ id: string }>();
   const bookingId = window.location.pathname.split("/")[4];
   const url = decodeURIComponent(bookingId);
@@ -85,8 +85,7 @@ const Booking = () => {
       .then((data) => {
         // Traiter la réponse de la requête
         console.log(data);
-        navigate('/succesOrder')
-
+        navigate("/succesOrder");
       })
       .catch((error) => {
         // Gérer les erreurs
@@ -110,11 +109,11 @@ const Booking = () => {
   return (
     <div>
       <Nav />
-      <div className="flex-layout">
+      <div className="pageBooking">
         {game && (
           <div className="div2">
             <div className="textDescBooking">
-              <img src={game.image} alt={game.name} />
+              <img className="imgBooking" src={game.image} alt={game.name} />
               <p className="reserv-date">
                 Vous allez réserver la salle {game.name} le {formattedString}
               </p>

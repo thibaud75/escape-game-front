@@ -1,9 +1,13 @@
-.flex-layout{
+.pageBooking{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    width: 70%;
+    flex-wrap: wrap;
+    align-items: center;
     text-align: center;
+}
+
+.imgBooking{
+    width: 50%;
 }
 
 .div2{
