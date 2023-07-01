@@ -8,7 +8,7 @@ import { accountService } from "../_services/account.service";
 
 interface ParticipantData {
   Nom: string;
-  Prénom: string;
+  Prenom: string;
   Date: string;
 }
 
@@ -32,6 +32,7 @@ const Booking = () => {
   const [game, setGame] = useState<Game | null>(null);
   const [participants, setParticipants] = useState<number>(0);
   const [participantData, setParticipantData] = useState<any[]>([]);
+  const nameRegex = /^[a-zA-ZÀ-ÿ\-']+$/;
 
   const handleParticipantInputChange = (
     index: number,
@@ -62,10 +63,66 @@ const Booking = () => {
   ) => {
     const value = parseInt(event.target.value);
     setParticipants(value);
-    console.log(value);
+
+    setParticipantData((prevData) => {
+      if (value > prevData.length) {
+        const newData = [...prevData];
+        for (let i = prevData.length; i < value; i++) {
+          newData.push({
+            Nom: "",
+            Prenom: "",
+            Date: "",
+          });
+        }
+        return newData;
+      } else if (value < prevData.length) {
+        return prevData.slice(0, value);
+      } else {
+        return prevData;
+      }
+    });
   };
 
   const handleSubmit = () => {
+    if (participantData.length === 0) {
+      alert("Veuillez remplir les informations des participants");
+      return;
+    }
+
+    let isValid = true;
+
+    for (let i = 0; i < participantData.length; i++) {
+      const element = participantData[i];
+      const isPrenomValid = nameRegex.test(element.Prenom);
+      const isNomValid = nameRegex.test(element.Nom);
+
+      if (Object.values(element).some((value) => value === "")) {
+        alert("Veuillez remplir tous les champs!");
+        isValid = false;
+        break;
+      } else if (
+        element.Prenom === "" ||
+        element.Nom === "" ||
+        element.Date === ""
+      ) {
+        alert("Veuillez remplir tous les champs!");
+        isValid = false;
+        break;
+      } else if (!isPrenomValid) {
+        alert("Les prénoms des participants doivent être valides!");
+        isValid = false;
+        break;
+      } else if (!isNomValid) {
+        alert("Les noms des participants doivent être valides!");
+        isValid = false;
+        break;
+      }
+    }
+
+    if (!isValid) {
+      return;
+    }
+
     const body = {
       dispo: {
         gameId: gameId,
@@ -79,7 +136,6 @@ const Booking = () => {
       },
     };
 
-    // Envoyer la requête POST
     fetch("http://localhost:3000/disponibility/reserveform", {
       method: "POST",
       headers: {
@@ -90,12 +146,10 @@ const Booking = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        // Traiter la réponse de la requête
         console.log(data);
         navigate("/succesOrder");
       })
       .catch((error) => {
-        // Gérer les erreurs
         console.error(error);
       });
   };
@@ -131,10 +185,7 @@ const Booking = () => {
                 }`}
               </p>
             </div>
-            <select
-              value={participants ?? ""}
-              onChange={handleParticipantsChange}
-            >
+            <select value={participants} onChange={handleParticipantsChange}>
               <option value="">Nombre de participants</option>
               {game.capacity.map((capacity, index) => (
                 <option key={index} value={capacity}>

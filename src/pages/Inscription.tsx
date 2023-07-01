@@ -9,7 +9,7 @@ function Auth() {
   const navigate = useNavigate();
 
   const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-  const nameRegex = /^[a-zéèçà]{2,50}(-|)?([a-zéèçà]{2,50})?$/;
+  const nameRegex = /^[a-zA-ZÀ-ÿ\-']+$/;
   const addressRegex = /^[a-zA-Z0-9\s,.'-]{3,}$/;
 
   const getData = (e: React.FormEvent<HTMLFormElement>) => {
@@ -39,19 +39,19 @@ function Auth() {
 
     if (
       emailRegex.test(newEmail) &&
-      newPassword.length > 0 &&
+      nameRegex.test(newName) &&
       // nameRegex.test(newName) &&
       // nameRegex.test(newLastname)
-      newLastname.length > 0 &&
-      newName.length > 0
+      nameRegex.test(newLastname) &&
+      newPassword.length > 0
     ) {
       callApi(data);
     } else if (!emailRegex.test(newEmail)) {
       alert("veuillez entrer une adresse mail valide");
-      // } else if (!nameRegex.test(newName)) {
-      //   alert("veuillez entrer un nom valide");
-      // } else if (!nameRegex.test(newLastname)) {
-      //   alert("veuillez entrer un prénom valide");
+    } else if (!nameRegex.test(newName)) {
+      alert("veuillez entrer un prénom valide");
+    } else if (!nameRegex.test(newLastname)) {
+      alert("veuillez entrer un nom valide");
     } else {
       alert("Veuillez remplir tous les champs");
     }
