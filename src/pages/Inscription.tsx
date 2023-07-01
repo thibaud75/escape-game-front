@@ -5,19 +5,20 @@ import Footer from "../components/Footer";
 import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
 
-
 function Auth() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+  const nameRegex = /^[a-zéèçà]{2,50}(-|)?([a-zéèçà]{2,50})?$/;
+  const addressRegex = /^[a-zA-Z0-9\s,.'-]{3,}$/;
+
   const getData = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
 
-    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-
     const email = formData.get("email");
     let newEmail = email as string;
-    
 
     const password = formData.get("password");
     let newPassword = password as string;
@@ -36,13 +37,23 @@ function Auth() {
       id: uuidv4(),
     };
 
-    if ((emailRegex.test(newEmail)) && (newPassword.length > 0) && (newName.length > 0) && (newLastname.length > 0) ) {
+    if (
+      emailRegex.test(newEmail) &&
+      newPassword.length > 0 &&
+      // nameRegex.test(newName) &&
+      // nameRegex.test(newLastname)
+      newLastname.length > 0 &&
+      newName.length > 0
+    ) {
       callApi(data);
-    }
-    else if(!emailRegex.test(newEmail)){
-      alert("veuillez entrer une adresse mail valide")
-    }else{
-      alert("Veuillez remplir tous les champs")
+    } else if (!emailRegex.test(newEmail)) {
+      alert("veuillez entrer une adresse mail valide");
+      // } else if (!nameRegex.test(newName)) {
+      //   alert("veuillez entrer un nom valide");
+      // } else if (!nameRegex.test(newLastname)) {
+      //   alert("veuillez entrer un prénom valide");
+    } else {
+      alert("Veuillez remplir tous les champs");
     }
   };
 
@@ -60,9 +71,16 @@ function Auth() {
       })
       .then((data) => {
         console.log(data);
-        navigate("/auth")
+        navigate("/auth");
       });
   }
+
+  const checkInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!emailRegex.test(e.target.value)) {
+      return <p>Adresse email invalide</p>;
+    }
+  };
+
   return (
     <>
       <Nav />
@@ -73,25 +91,30 @@ function Auth() {
           type="text"
           placeholder="e-mail"
           name="email"
+          onChange={(e) => checkInput(e)}
         ></input>
+        <p></p>
         <input
           className="inputName"
           type="text"
           placeholder="Mot de passe"
           name="password"
         ></input>
+        <p></p>
         <input
           className="inputName"
           type="text"
           placeholder="Prenom"
           name="name"
         ></input>
+        <p></p>
         <input
           className="inputName"
           type="text"
           placeholder="Nom"
           name="lastname"
         ></input>
+        <p></p>
         <div>
           <button type="submit" className="buttonSubmit">
             <span>Inscription</span>

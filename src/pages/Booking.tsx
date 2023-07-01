@@ -6,6 +6,12 @@ import GameForm from "../components/GameForm";
 import "./Booking.css";
 import { accountService } from "../_services/account.service";
 
+interface ParticipantData {
+  Nom: string;
+  Prénom: string;
+  Date: string;
+}
+
 interface Game {
   name: string;
   description: string;
@@ -77,6 +83,7 @@ const Booking = () => {
     fetch("http://localhost:3000/disponibility/reserveform", {
       method: "POST",
       headers: {
+        Authorization: "Bearer " + accountService.getToken(),
         "Content-Type": "application/json",
       },
       body: JSON.stringify(body),

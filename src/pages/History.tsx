@@ -37,23 +37,20 @@ const History = () => {
   }, []);
 
   function particule() {
+    const userName = localStorage.getItem("userName");
+    const checkLetter = userName.charAt(0).toLowerCase();
+
     if (
-      localStorage.getItem("userName")?.charAt(0) == "A" ||
-      "E" ||
-      "I" ||
-      "O" ||
-      "U" ||
-      "Y" ||
-      "a" ||
-      "e" ||
-      "i" ||
-      "o" ||
-      "u" ||
-      "y"
+      checkLetter === "a" ||
+      checkLetter === "e" ||
+      checkLetter === "i" ||
+      checkLetter === "o" ||
+      checkLetter === "u" ||
+      checkLetter === "y"
     ) {
-      return <h2 className="h2resa">Reservations d'{localStorage.getItem("userName")}</h2>;
+      return <h2 className="h2resa">Réservations d' {userName}</h2>;
     } else {
-      return <h2 className="h2resa">Reservations de {localStorage.getItem("userName")}</h2>;
+      return <h2 className="h2resa">Réservations de {userName}</h2>;
     }
   }
 

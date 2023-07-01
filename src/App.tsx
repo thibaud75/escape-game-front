@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import React from "react";
 import "./App.css";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
@@ -95,19 +96,21 @@ function App() {
       <Nav />
       <div>{CustomizedSwitches()}</div>
       <div className="page">
-        <h1 className="title">Escape Game</h1>
+        <h1 className="title">
+          Bienvenue sur le site de reservation de Escape Game !
+        </h1>
         <div className="gamesAll">
           {game.map((elem, index) => {
             return (
-              <>
+              <React.Fragment key={index}>
                 <Link to={`/game/${elem.id}`} className="div-game">
-                  <div key={index}>
+                  <div>
                     <img className="imgApp" src={elem.image} alt={elem.name} />
                     <h2 className="titre">{elem.name}</h2>
                     <p className="description">{elem.petiteDesc}</p>
                   </div>
                 </Link>
-              </>
+              </React.Fragment>
             );
           })}
         </div>

@@ -13,6 +13,11 @@ let isLogged = () => {
   return !!token;
 };
 
+let getToken = () => {
+  let token = localStorage.getItem("token");
+  return token;
+};
+
 let saveUserId = (userId: string) => {
   localStorage.setItem("userId", userId);
 };
@@ -24,6 +29,7 @@ export const accountService = {
   saveToken,
   logout,
   isLogged,
+  getToken,
   saveUserId,
   saveUserName,
 };
