@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import GameForm from "../components/GameForm";
 import "./Booking.css";
 import { accountService } from "../_services/account.service";
+import { v4 as uuidv4 } from "uuid";
 
 interface ParticipantData {
   Nom: string;
@@ -126,6 +127,7 @@ const Booking = () => {
     const body = {
       dispo: {
         gameId: gameId,
+        gameName: game.name,
         disponibility: [
           {
             date: formattedString,
@@ -133,6 +135,7 @@ const Booking = () => {
           },
         ],
         userId: localStorage.getItem("userId"),
+        id: uuidv4(),
       },
     };
 
@@ -158,7 +161,7 @@ const Booking = () => {
           .json()
           .then((data) => {
             console.log(data);
-            navigate("/succesOrder");
+            navigate("/succesOrder/" + data.dispo.id);
           })
           .catch((error) => {
             console.error(error);

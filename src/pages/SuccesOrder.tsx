@@ -2,45 +2,76 @@ import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 import "./SuccesOrder.css";
-// import { useNavigate } from "react-router-dom";
 import { accountService } from "../_services/account.service";
+import { useParams, useNavigate } from "react-router-dom";
 
 function SuccesOrder() {
+  // const [gameId, setGameId] = useState();
   const [date, setDate] = useState();
-  const [gameId, setGameId] = useState();
   const [gameName, setGameName] = useState();
-
-  function apiForDate() {
-    fetch("http://localhost:3000/disponibility/getalldispo")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data[data.length - 1]);
-        // console.log(data[0].dispo.disponibility[0].date)
-
-        setDate(data[data.length - 1].disponibility[0].date);
-        setGameId(data[data.length - 1].gameId);
-      });
-  }
-
+  const { id: id } = useParams<{ id: string }>();
   const user = localStorage.getItem("userName");
+  const navigate = useNavigate();
 
-  function apiForNameGame() {
-    fetch(`http://localhost:3000/games/${gameId}`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(gameId);
-        console.log(data.name);
-        setGameName(data.name);
-      });
-  }
+  // function apiForDate() {
+  //   fetch("http://localhost:3000/disponibility/getalldispo")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log(data[data.length - 1]);
+  //       // console.log(data[0].dispo.disponibility[0].date)
+
+  //       setDate(data[data.length - 1].disponibility[0].date);
+  //       setGameId(data[data.length - 1].gameId);
+  //     });
+  // }
+
+  // function apiForNameGame() {
+  //   fetch(`http://localhost:3000/games/${gameId}`)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log(gameId);
+  //       setGameName(data.name);
+  //     });
+  // }
+
+  // useEffect(() => {
+  //   apiForDate();
+  // }, []);
+
+  // useEffect(() => {
+  //   apiForNameGame();
+  // }, [gameId]);
+  const getInfosOneDispo = () => {
+    fetch("http://localhost:3000/disponibility/getonedispo/" + id).then(
+      (response) => {
+        if (response.ok === false) {
+          alert(
+            "Vous n'avez pas accès à cette page" +
+              "statut: " +
+              response.statusText +
+              " erreur " +
+              response.status
+          );
+          navigate("/auth");
+        } else {
+          response
+            .json()
+            .then((data) => {
+              console.log(data);
+              setDate(data.disponibility[0].date);
+              setGameName(data.gameName);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        }
+      }
+    );
+  };
 
   useEffect(() => {
-    apiForDate();
+    getInfosOneDispo();
   }, []);
-
-  useEffect(() => {
-    apiForNameGame();
-  }, [gameId]);
 
   return (
     <>

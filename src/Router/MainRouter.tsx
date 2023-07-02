@@ -8,7 +8,6 @@ import History from "../pages/History";
 import App from "../App";
 import SuccesOrder from "../pages/SuccesOrder";
 
-
 export default function MainRouter() {
   return (
     <BrowserRouter>
@@ -19,8 +18,7 @@ export default function MainRouter() {
         <Route path="/game/:id" element={<Game />} />
         <Route path="/game/:id/booking/:dateId" element={<Booking />} />
         <Route path="/history" element={<History />} />
-        <Route path="/succesOrder" element={<SuccesOrder />} />
-
+        <Route path="/succesOrder/:id" element={<SuccesOrder />} />
       </Routes>
     </BrowserRouter>
   );
