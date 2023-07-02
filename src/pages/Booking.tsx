@@ -143,15 +143,28 @@ const Booking = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        navigate("/succesOrder");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    }).then((response) => {
+      if (response.ok === false) {
+        alert(
+          "Vous n'êtes pas autorisé à reservé une salle. Plus d'informations: " +
+            "statut: " +
+            response.statusText +
+            " erreur " +
+            response.status
+        );
+        navigate("/auth");
+      } else {
+        response
+          .json()
+          .then((data) => {
+            console.log(data);
+            navigate("/succesOrder");
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    });
   };
 
   const gameForms = [];

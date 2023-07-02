@@ -97,7 +97,7 @@ function App() {
       <div>{CustomizedSwitches()}</div>
       <div className="page">
         <h1 className="title">
-          Bienvenue sur le site de reservation de Escape Game !
+          Bienvenue sur le site de réservation de Escape Game !
         </h1>
         <div className="gamesAll">
           {game.map((elem, index) => {
