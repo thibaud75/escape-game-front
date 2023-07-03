@@ -42,31 +42,34 @@ function SuccesOrder() {
   //   apiForNameGame();
   // }, [gameId]);
   const getInfosOneDispo = () => {
-    fetch("http://localhost:3000/disponibility/getonedispo/" + id).then(
-      (response) => {
-        if (response.ok === false) {
-          alert(
-            "Vous n'avez pas accès à cette page" +
-              "statut: " +
-              response.statusText +
-              " erreur " +
-              response.status
-          );
-          navigate("/auth");
-        } else {
-          response
-            .json()
-            .then((data) => {
-              console.log(data);
-              setDate(data.disponibility[0].date);
-              setGameName(data.gameName);
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        }
+    fetch("http://localhost:3000/disponibility/getonedispo/" + id, {
+      headers: {
+        Authorization: "Bearer " + accountService.getToken(),
+        "Content-Type": "application/json",
+      },
+    }).then((response) => {
+      if (response.ok === false) {
+        alert(
+          "Vous n'avez pas accès à cette page" +
+            "statut: " +
+            response.statusText +
+            " erreur " +
+            response.status
+        );
+        navigate("/auth");
+      } else {
+        response
+          .json()
+          .then((data) => {
+            console.log(data);
+            setDate(data.disponibility[0].date);
+            setGameName(data.gameName);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       }
-    );
+    });
   };
 
   useEffect(() => {

@@ -160,6 +160,7 @@ const Booking = () => {
         response
           .json()
           .then((data) => {
+            console.log(response);
             console.log(data);
             navigate("/succesOrder/" + data.dispo.id);
           })
