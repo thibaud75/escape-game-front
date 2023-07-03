@@ -50,10 +50,13 @@ body {
 .imgApp {
   margin: 0.5em;
   width: 95%;
+  height: 250px;
   border-radius: 0.5em;
 }
 
 header {
+  position: sticky;
+  top: 0px;
   margin-bottom: 2em;
   display: flex;
   justify-content: space-between;
@@ -63,6 +66,7 @@ header {
   align-items: center;
   /* position: fixed; */
 }
+
 header > span {
   padding: 10px;
   height: fit-content;

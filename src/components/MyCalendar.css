@@ -34,7 +34,7 @@ li{
 }
 
 .morning:hover,.afternoon:hover{
-  background-color: lightblue;
+  background-color: #00e7fd;
   transition: .7s;
 }
 

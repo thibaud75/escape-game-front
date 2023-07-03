@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Auth from "../pages/Auth";
+import LogoEscape from "./Logo";
 import { Outlet, Link } from "react-router-dom";
 import { Route, useLocation, useNavigate } from "react-router-dom";
 import { accountService } from "../_services/account.service";
@@ -21,10 +22,11 @@ export default function Nav() {
   return (
     <header>
       <Link to="/">
-        <img
+        {/* <img
           className="logo"
           src="https://upload.wikimedia.org/wikipedia/commons/5/54/Logo-escapegame-blanc.png"
-        />
+        /> */}
+        <LogoEscape></LogoEscape>
       </Link>
       {isConnect == true && <h1>Bonjour {localStorage.getItem("userName")}</h1>}
       <div className="droite">
