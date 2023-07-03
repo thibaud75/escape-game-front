@@ -81,7 +81,7 @@ const MyCalendar = () => {
   console.log(arrayPush);
 
   return (
-    <div>
+    <div className="pageCalendar">
       <h2>Disponibilités</h2>
       <ul className="list-day">
         {futureDates.map((date, index) => {
@@ -112,7 +112,7 @@ const MyCalendar = () => {
                 }
                 disabled={initialAfternoonState}
               >
-                APREM
+                APRES-MIDI
               </button>
             </li>
           );
@@ -120,6 +120,7 @@ const MyCalendar = () => {
       </ul>
       {selectedDate && (
         <button
+          className="buttonSubmit"
           onClick={() => {
             if (accountService.isLogged()) {
               navigate(`/game/${id}/booking/${selectedDate}`);
@@ -128,7 +129,7 @@ const MyCalendar = () => {
             }
           }}
         >
-          Réserver
+          <span>Réserver</span>
         </button>
       )}
     </div>

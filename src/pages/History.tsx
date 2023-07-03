@@ -67,14 +67,19 @@ const History = () => {
                   Votre réservation pour la salle {elem.gameId} le{" "}
                   {elem.disponibility[0].date}
                 </h3>
-                <p className="participantsList">Participants :</p>
-                <ul>
-                  {elem.disponibility[0].users.map((user, userIndex) => (
-                    <li className="participants" key={userIndex}>
-                      {user.Prenom} {user.Nom} né le {user.Date}
-                    </li>
-                  ))}
-                </ul>
+                <div className="PAndS">
+                  <div className="Party">
+                    <p className="participantsList">Participants :</p>
+                    <ul>
+                      {elem.disponibility[0].users.map((user, userIndex) => (
+                        <li className="participants" key={userIndex}>
+                          {user.Prenom} {user.Nom} né le {user.Date}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>Status : Evenement en attente</div>
+                </div>
               </div>
             ))}
           </>

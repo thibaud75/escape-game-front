@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import MyCalendar from "../components/MyCalendar";
+import "./Game.css";
 
 interface Game {
   name: string;
@@ -27,10 +28,10 @@ const Game = () => {
   return (
     <div>
       <Nav />
-      <div className="flex-layout">
+      <div className="pageGame">
         {game && (
-          <div className="div-game">
-            <img src={game.image} alt={game.name} />
+          <div className="gameOne">
+            <img className="imgGame" src={game.image} alt={game.name} />
             <h2 className="titre">{game.name}</h2>
             <p className="description">{game.description}</p>
           </div>
