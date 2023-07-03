@@ -10,7 +10,6 @@ function Auth() {
 
   const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
   const nameRegex = /^[a-zA-ZÀ-ÿ\-']+$/;
-  const addressRegex = /^[a-zA-Z0-9\s,.'-]{3,}$/;
 
   const getData = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,21 +28,24 @@ function Auth() {
     const lastname = formData.get("lastname");
     let newLastname = lastname as string;
 
+    const birthday = formData.get("birthday");
+    let newBirthday = birthday as string;
+
     const data = {
       email: newEmail,
       password: newPassword,
       name: newName,
       lastname: newLastname,
+      birthday: newBirthday,
       id: uuidv4(),
     };
 
     if (
       emailRegex.test(newEmail) &&
       nameRegex.test(newName) &&
-      // nameRegex.test(newName) &&
-      // nameRegex.test(newLastname)
       nameRegex.test(newLastname) &&
-      newPassword.length > 0
+      newPassword.length > 0 &&
+      newBirthday !== ""
     ) {
       callApi(data);
     } else if (!emailRegex.test(newEmail)) {
@@ -52,6 +54,10 @@ function Auth() {
       alert("veuillez entrer un prénom valide");
     } else if (!nameRegex.test(newLastname)) {
       alert("veuillez entrer un nom valide");
+    } else if (newPassword.length < 1) {
+      alert("Votre password doit contenir au moins 6 caractères!");
+    } else if (newBirthday === "") {
+      alert("Veuillez remplir votre date de naissance!");
     } else {
       alert("Veuillez remplir tous les champs");
     }
@@ -75,12 +81,6 @@ function Auth() {
       });
   }
 
-  const checkInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!emailRegex.test(e.target.value)) {
-      return <p>Adresse email invalide</p>;
-    }
-  };
-
   return (
     <>
       <Nav />
@@ -91,30 +91,31 @@ function Auth() {
           type="text"
           placeholder="e-mail"
           name="email"
-          onChange={(e) => checkInput(e)}
         ></input>
-        <p></p>
+
         <input
           className="inputName"
           type="text"
           placeholder="Mot de passe"
           name="password"
         ></input>
-        <p></p>
+
         <input
           className="inputName"
           type="text"
           placeholder="Prenom"
           name="name"
         ></input>
-        <p></p>
+
         <input
           className="inputName"
           type="text"
           placeholder="Nom"
           name="lastname"
         ></input>
-        <p></p>
+
+        <input className="inputName" type="date" name="birthday"></input>
+
         <div>
           <button type="submit" className="buttonSubmit">
             <span>Inscription</span>
