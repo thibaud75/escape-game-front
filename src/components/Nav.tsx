@@ -1,11 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Auth from "../pages/Auth";
 import LogoEscape from "./Logo";
 import { Outlet, Link } from "react-router-dom";
 import { Route, useLocation, useNavigate } from "react-router-dom";
 import { accountService } from "../_services/account.service";
+import "./Nav.css";
 
 export default function Nav() {
+  const [isConnect, setIsConnect] = useState(accountService.isLogged());
+  const [dataUser, setDataUser] = useState<string[]>([]);
+
+  const getUserData = () => {
+    fetch("http://localhost:3000/auth/infos/" + localStorage.getItem("userId"))
+      .then((response) => response.json())
+      .then((data) => {
+        setDataUser(data);
+      });
+  };
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+
+  console.log(dataUser);
   const navigate = useNavigate();
 
   function onConnexion() {
@@ -17,7 +34,9 @@ export default function Nav() {
     navigate("/history");
   }
 
-  const [isConnect, setIsConnect] = useState(accountService.isLogged());
+  function onAdmin() {
+    navigate("/admin");
+  }
 
   return (
     <header>
@@ -28,15 +47,47 @@ export default function Nav() {
         /> */}
         <LogoEscape></LogoEscape>
       </Link>
-      {isConnect == true && <h1>Bonjour {localStorage.getItem("userName")}</h1>}
+      {isConnect == true && (
+        <h1 className="UserNameTitle">
+          Bonjour {localStorage.getItem("userName")}
+        </h1>
+      )}
       <div className="droite">
-        <span
-          id="history"
-          onClick={() => {
-            onHistory();
-          }}
-        >
-          {isConnect == true && <button className="navBtn">Historique</button>}
+        <span>
+          {isConnect == true && dataUser.role === "admin" ? (
+            <div>
+              <button
+                id="history"
+                onClick={() => {
+                  onAdmin();
+                }}
+                className="navBtn"
+              >
+                Admin
+              </button>
+              <button
+                id="history"
+                onClick={() => {
+                  onHistory();
+                }}
+                className="navBtn"
+              >
+                Historique
+              </button>
+            </div>
+          ) : isConnect === true && dataUser.role !== "admin" ? (
+            <button
+              id="history"
+              onClick={() => {
+                onHistory();
+              }}
+              className="navBtn"
+            >
+              Historique
+            </button>
+          ) : (
+            ""
+          )}
         </span>
         {useLocation().pathname != "/auth" && (
           <button
