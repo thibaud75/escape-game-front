@@ -38,20 +38,25 @@ const History = () => {
   }, []);
 
   function particule() {
-    const userName = localStorage.getItem("userName");
-    const checkLetter = userName.charAt(0).toLowerCase();
-
-    if (
-      checkLetter === "a" ||
-      checkLetter === "e" ||
-      checkLetter === "i" ||
-      checkLetter === "o" ||
-      checkLetter === "u" ||
-      checkLetter === "y"
-    ) {
-      return <h2 className="h2resa">Réservations d' {userName}</h2>;
-    } else {
-      return <h2 className="h2resa">Réservations de {userName}</h2>;
+  
+      const userName = localStorage.getItem("userName");
+      if (userName != null){
+      const checkLetter = userName.charAt(0).toLowerCase();
+  
+      if (
+        checkLetter === "a" ||
+        checkLetter === "e" ||
+        checkLetter === "i" ||
+        checkLetter === "o" ||
+        checkLetter === "u" ||
+        checkLetter === "y"
+      ) {
+        return <h2 className="h2resa">Réservations d' {userName}</h2>;
+      } else {
+        return <h2 className="h2resa">Réservations de {userName}</h2>;
+      }
+    }else{
+      alert('erreur')
     }
   }
 

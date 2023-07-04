@@ -194,7 +194,7 @@ const Booking = () => {
     const body = {
       dispo: {
         gameId: gameId,
-        gameName: game.name,
+        gameName: game?.name,
         disponibility: [
           {
             date: formattedString,
