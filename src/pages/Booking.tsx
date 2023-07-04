@@ -155,6 +155,7 @@ const Booking = () => {
             " erreur " +
             response.status
         );
+        accountService.logout();
         navigate("/auth");
       } else {
         response

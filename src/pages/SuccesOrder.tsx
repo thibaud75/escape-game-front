@@ -56,7 +56,7 @@ function SuccesOrder() {
             " erreur " +
             response.status
         );
-        navigate("/auth");
+        navigate("/");
       } else {
         response
           .json()
