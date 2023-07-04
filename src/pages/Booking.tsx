@@ -185,6 +185,17 @@ const Booking = () => {
     }
   }
 
+  function getDataInput(e:React.FormEvent<HTMLFormElement>){
+    e.preventDefault()
+    const date = new FormData(e.currentTarget)
+    console.log(date)
+    const allDate = date.get("Date")
+    console.log(allDate)
+    // accountService.isLogged()
+    //                 ? handleSubmit()
+    //                 : alert("Veuillez vous connecter!");
+  }
+
   return (
     <div>
       <Nav />
@@ -211,22 +222,19 @@ const Booking = () => {
                 </option>
               ))}
             </select>
-            <form className="formBooking" onSubmit={(e) => e.preventDefault()}>
+            <form className="formBooking" onSubmit={(e) =>getDataInput(e)}>
               {gameForms}
-            </form>
-            <div>
+              <div>
               <button
                 className="buttonSubmit"
                 type="submit"
-                onClick={() => {
-                  accountService.isLogged()
-                    ? handleSubmit()
-                    : alert("Veuillez vous connecter!");
-                }}
+               
               >
                 <span>Réserver</span>
               </button>
             </div>
+            </form>
+            
           </div>
         )}
       </div>

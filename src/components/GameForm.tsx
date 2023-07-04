@@ -10,6 +10,7 @@ const GameForm: React.FC<GameFormProps> = ({ onInputChange }) => {
     const { name, value } = event.target;
     onInputChange({ [name]: value });
     console.log(name, value)
+    
   };
 
   return (
