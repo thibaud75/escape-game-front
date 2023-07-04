@@ -192,4 +192,9 @@ a:-webkit-any-link {
   .imgApp {
     width: 75%;
   }
+
+  .UserNameTitle{
+    font-size: 1em;
+    margin-left: 2em;
+  }
 }

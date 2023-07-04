@@ -47,3 +47,15 @@ li{
 .participants{
     margin-bottom: .5em;
 }
+
+@media screen and (max-width: 900px) {
+    .reservOne{
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .reservOne{
+        width: 90%;
+    }
+}
