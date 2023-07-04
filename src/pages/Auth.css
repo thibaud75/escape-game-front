@@ -8,13 +8,13 @@ body{
 display: flex;
 flex-direction: column;
 align-items: center;
-background-color: blue;
+background-color: #1E2952;
 color: white;
 padding: 1em;
-margin: auto;
+margin-top: 5em;
 border-radius: 0.5em;
 width: 50vw;
-box-shadow: 10px 10px 8px teal;
+box-shadow: 10px 10px 8px #273a81;
 }
 
 .inputEmail, .inputPassword{
@@ -23,8 +23,8 @@ box-shadow: 10px 10px 8px teal;
   height: 3em;
   border: none;
   border-radius: .5em;
-  box-shadow:  5px 5px 15px rgb(2, 2, 156),
-             -5px -5px 15px rgb(0, 0, 218);
+  box-shadow:  5px 5px 15px #1b2549,
+             -5px -5px 15px #243263;
 }
 
 button{

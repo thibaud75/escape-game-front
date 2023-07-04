@@ -11,9 +11,9 @@
       font-style: oblique;
       font-size: 1em;
       color: white;
-      background: #6225E6;
+      background: #1E2952;
       transition: .5s;
-      box-shadow: .3em .3em 0 black;
+      box-shadow: .2em .3em 0 black;
       transform: skewX(-15deg);
   }
   
@@ -23,7 +23,7 @@
   
   .cta:hover {
       transition: 0.5s;
-      box-shadow: .5em .5em 0 #FBC638;
+      box-shadow: .3em .4em 0 #FBC638;
   }
   
   .cta span:nth-child(2) {
@@ -77,12 +77,12 @@
   
   @keyframes color_anim {
       0% {
-          fill: white;
+          fill: #1E2952;
       }
       50% {
           fill: #FBC638;
       }
       100% {
-          fill: white;
+          fill: #1E2952;
       }
   }
