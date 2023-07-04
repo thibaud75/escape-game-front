@@ -51,6 +51,73 @@ const Booking = () => {
 
   console.log(participantData);
 
+  const getAlldate = () =>{
+    let allDate : string[]= []
+    participantData.forEach((element, index)=>{
+          allDate.push(element.Date)
+    })
+    console.log(allDate, 'test11')
+    return allDate
+  }
+
+  function calculerAge(dateNaissance:Date) {
+
+    var dateActuelle = new Date();
+    var anneeActuelle = dateActuelle.getFullYear();
+    var moisActuel = dateActuelle.getMonth() + 1; // les mois sont indexés à partir de 0
+    var jourActuel = dateActuelle.getDate();
+  
+    var anneeNaissance = dateNaissance.getFullYear();
+    var moisNaissance = dateNaissance.getMonth() + 1;
+    var jourNaissance = dateNaissance.getDate();
+  
+    var age = anneeActuelle - anneeNaissance;
+  
+    // Vérifier si l'anniversaire de la personne est déjà passé cette année
+    if (moisActuel < moisNaissance || (moisActuel === moisNaissance && jourActuel < jourNaissance)) {
+      age--;
+    }
+  
+    return age;
+  }
+  
+  const allAge = () =>{
+
+    const alldate = getAlldate()
+    const allAge : number[]= []
+
+    alldate.forEach((elem =>{
+      console.log(elem)
+      const annee = parseInt(elem.split("-")[0])
+      const mois = parseInt(elem.split("-")[1])
+      const jour = parseInt(elem.split("-")[2])
+
+      console.log(annee, 'ANNEE')
+      console.log(mois, 'MOIS')
+      console.log(jour, 'JOUR')
+
+      const dateNaissance = new Date(annee, mois, jour); 
+      console.log(dateNaissance, 'DATE DE NAISSANCE')
+      const age = calculerAge(dateNaissance);
+      console.log(age);
+      allAge.push(age)
+      console.log(allAge)
+
+    }))
+
+    return allAge
+  }
+
+  const isAdult =()=>{
+    const allAges : number[] = allAge()
+    let adulteOrNot = false
+    allAges.forEach(elem => {
+      if (elem>=18){
+        adulteOrNot = true
+      }})
+    return adulteOrNot
+  }
+  
   useEffect(() => {
     fetch(`http://localhost:3000/games/${gameId}`)
       .then((response) => response.json())
@@ -137,39 +204,42 @@ const Booking = () => {
         userId: localStorage.getItem("userId"),
         id: uuidv4(),
       },
-    };
+    };if (isAdult()){
 
-    fetch("http://localhost:3000/disponibility/reserveform", {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + accountService.getToken(),
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    }).then((response) => {
-      if (response.ok === false) {
-        alert(
-          "Vous n'êtes pas autorisé à reservé une salle. Plus d'informations: " +
-            "statut: " +
-            response.statusText +
-            " erreur " +
-            response.status
-        );
-        accountService.logout();
-        navigate("/auth");
-      } else {
-        response
-          .json()
-          .then((data) => {
-            console.log(response);
-            console.log(data);
-            navigate("/succesOrder/" + data.dispo.id);
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      }
-    });
+      fetch("http://localhost:3000/disponibility/reserveform", {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + accountService.getToken(),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }).then((response) => {
+        if (response.ok === false) {
+          alert(
+            "Vous n'êtes pas autorisé à reservé une salle. Plus d'informations: " +
+              "statut: " +
+              response.statusText +
+              " erreur " +
+              response.status
+          );
+          accountService.logout();
+          navigate("/auth");
+        } else {
+          response
+            .json()
+            .then((data) => {
+              console.log(response);
+              console.log(data);
+              navigate("/succesOrder/" + data.dispo.id);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        }
+      });
+    }else{
+      alert('Au moins une personne doit avoir plus de 18 ans')
+    }
   };
 
   const gameForms = [];
@@ -183,17 +253,6 @@ const Booking = () => {
         </div>
       );
     }
-  }
-
-  function getDataInput(e:React.FormEvent<HTMLFormElement>){
-    e.preventDefault()
-    const date = new FormData(e.currentTarget)
-    console.log(date)
-    const allDate = date.get("Date")
-    console.log(allDate)
-    // accountService.isLogged()
-    //                 ? handleSubmit()
-    //                 : alert("Veuillez vous connecter!");
   }
 
   return (
@@ -222,19 +281,23 @@ const Booking = () => {
                 </option>
               ))}
             </select>
-            <form className="formBooking" onSubmit={(e) =>getDataInput(e)}>
+            <form className="formBooking" onSubmit={(e) => e.preventDefault()}>
               {gameForms}
-              <div>
+              
+            <div>
               <button
                 className="buttonSubmit"
                 type="submit"
-               
+                onClick={() => {
+                  accountService.isLogged()
+                    ? handleSubmit()
+                    : alert("Veuillez vous connecter!");
+                }}
               >
                 <span>Réserver</span>
               </button>
             </div>
             </form>
-            
           </div>
         )}
       </div>
