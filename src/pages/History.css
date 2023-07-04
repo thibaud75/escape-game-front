@@ -5,6 +5,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 5em;
 }
 
 .h2resa{
@@ -12,7 +13,7 @@
 }
 
 .reservOne{
-    background-color: blue;
+    background-color: midnightblue;
     margin-bottom: 1em;
     padding-left: 1em;
     padding-right: 1em;
