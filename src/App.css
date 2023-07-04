@@ -64,7 +64,6 @@ header {
   height: 70px;
   background-color: blue;
   align-items: center;
-  /* position: fixed; */
 }
 
 header > span {
@@ -103,7 +102,7 @@ footer {
 
 .reseaux {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 #connexion:hover {
@@ -154,4 +153,43 @@ a:-webkit-any-link {
   color: white;
   font-family: Phantomsans, sans-serif;
   text-decoration: none;
+}
+
+@media screen and (max-width: 900px) {
+  .div-game {
+    width: 40%;
+  }
+  
+  header {
+    position: fixed;
+    top: 0px;
+  }
+  
+  .title{
+    text-align:center ;
+    margin-top: 3em;
+  }
+
+  .reseaux {
+    flex-direction: column;
+  }
+
+  .aPropos2 {
+    display: none;
+  }
+
+  footer {
+    display: block;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .div-game {
+    width: 80%;
+  }
+
+  .imgApp {
+    width: 75%;
+  }
 }

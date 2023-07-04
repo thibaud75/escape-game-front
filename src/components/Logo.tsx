@@ -5,7 +5,7 @@ export default function LogoEscape() {
     <>
       <div className="wrapper">
         <a className="cta" href="#">
-          <span className="spanLogo">Escape MMA</span>
+          <span className="spanLogo">Escape Game</span>
           <span className="spanLogo">
             <svg
               width="2em"

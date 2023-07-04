@@ -96,24 +96,26 @@ const MyCalendar = () => {
           const initialAfternoonState = buttonStates[index * 2 + 1];
 
           return (
-            <li key={index}>
+            <li key={index} className="liResa">
               <p className="date">{formattedDate}</p>
-              <button
-                onClick={() => handleDateClick(morningTime)}
-                className={isMorningSelected ? "morning selected" : "morning"}
-                disabled={initialMorningState}
-              >
-                MATIN
-              </button>
-              <button
-                onClick={() => handleDateClick(afternoonTime)}
-                className={
-                  isAfternoonSelected ? "afternoon selected" : "afternoon"
-                }
-                disabled={initialAfternoonState}
-              >
-                APRES-MIDI
-              </button>
+              <div className="buttonResa">
+                <button
+                  onClick={() => handleDateClick(morningTime)}
+                  className={isMorningSelected ? "morning selected" : "morning"}
+                  disabled={initialMorningState}
+                >
+                  MATIN
+                </button>
+                <button
+                  onClick={() => handleDateClick(afternoonTime)}
+                  className={
+                    isAfternoonSelected ? "afternoon selected" : "afternoon"
+                  }
+                  disabled={initialAfternoonState}
+                >
+                  APRES-MIDI
+                </button>
+              </div>
             </li>
           );
         })}

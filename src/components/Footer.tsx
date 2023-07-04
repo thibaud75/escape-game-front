@@ -18,30 +18,34 @@ export default function Footer() {
         </div>
 
         <div className="aPropos">
-          <p>A propos</p>
-          <p>
-            <strong>Escape Game</strong> est la référence pour les détectives et
-            aveturiers sur Paris ! Si vous êtes vaillants et curieux rejoignez
-            l'aventure <strong>Escape Game</strong> ! Sinon il existe des escape
-            games moins poussés et moins amusants tels que le{" "}
-            <strong>peu importe</strong> et{" "}
-            <strong>l'escape du dictateur</strong>. On vous aura prevenus !
-          </p>
-          {/* </div>
-
-      <div className="reseaux"> */}
-          <Link to="https://fr-fr.facebook.com/" target="blank">
-            <button className="navBtn">Facebook</button>
-          </Link>
-          <Link to="https://twitter.com/?lang=fr" target="blank">
-            <button className="navBtn">Twitter</button>
-          </Link>
-          <Link to="https://www.instagram.com/" target="blank">
-            <button className="navBtn">Instagram</button>
-          </Link>
-          <Link to="https://www.youtube.com/watch?v=uYZzMPsm6c4" target="blank">
-            <button className="navBtn">Youtube</button>
-          </Link>
+          <div className="aPropos2">
+            <p>A propos</p>
+            <p>
+              <strong>Escape Game</strong> est la référence pour les détectives
+              et aveturiers sur Paris ! Si vous êtes vaillants et curieux
+              rejoignez l'aventure <strong>Escape Game</strong> ! Sinon il
+              existe des escape games moins poussés et moins amusants tels que
+              le <strong>peu importe</strong> et{" "}
+              <strong>l'escape du dictateur</strong>. On vous aura prevenus !
+            </p>
+          </div>
+          <div className="reseaux">
+            <Link to="https://fr-fr.facebook.com/" target="blank">
+              <button className="navBtn">Facebook</button>
+            </Link>
+            <Link to="https://twitter.com/?lang=fr" target="blank">
+              <button className="navBtn">Twitter</button>
+            </Link>
+            <Link to="https://www.instagram.com/" target="blank">
+              <button className="navBtn">Instagram</button>
+            </Link>
+            <Link
+              to="https://www.youtube.com/watch?v=uYZzMPsm6c4"
+              target="blank"
+            >
+              <button className="navBtn">Youtube</button>
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

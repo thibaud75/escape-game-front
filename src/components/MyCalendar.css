@@ -14,6 +14,17 @@ li{
   margin-right: 1em;
 }
 
+.liResa{
+  background-color: orange;
+  border-radius: .5em;
+  transition: all 0.7s ease;
+  padding: 1em;
+}
+
+.liResa:hover{
+  background-color: rgb(219, 121, 2);
+}
+
 .list-day {
   display: flex;
   list-style-type: none;
@@ -28,7 +39,7 @@ li{
   margin: .5em;
   border-radius: .3em;
   cursor: pointer;
-  background-color: greenyellow;
+  background-color: rgb(146, 236, 12);
   color: white;
   font-weight: 700;
 }
@@ -39,9 +50,13 @@ li{
 }
 
 .afternoon:disabled, .morning:disabled{
-  background-color: red;
+  background-color: rgb(255, 20, 3);
   cursor: default;
   color: white;
+}
+
+.selected{
+  background-color: #0498c5;
 }
 
 button{
@@ -87,4 +102,20 @@ button{
   
   .buttonSubmit:hover span {
   background: none;
+  }
+
+  @media screen and (max-width: 1280px) {
+    .list-day{
+      flex-direction: column;
+      width: 80vw;
+    }
+
+    .liResa{
+      margin-bottom: 1em;
+    }
+
+    .buttonResa{
+      display: flex;
+      flex-direction: row;
+    }
   }
