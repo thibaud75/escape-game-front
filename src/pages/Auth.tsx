@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import React from "react";
 import "./Auth.css";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import { HiOutlineLogin } from "react-icons/hi";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import { accountService } from "../_services/account.service";
+import { UserDataContext } from "./UserDataContext";
 
 function Auth() {
+  const { updateUserData } = useContext(UserDataContext);
   const [redirectToHome, setRedirectToHome] = useState(false);
   const navigate = useNavigate();
 
@@ -43,16 +46,15 @@ function Auth() {
       })
       .then((data) => {
         console.log(data);
-        if (data.message != "Paire login/mot de passe incorrecte"){
-
+        if (data.message != "Paire login/mot de passe incorrecte") {
           accountService.saveToken(data.token);
           accountService.saveUserId(data.userId);
           accountService.saveUserName(data.userName);
           console.log("test");
+          updateUserData(data.user);
           navigate("/");
-        }
-        else{
-          alert("L'identifiant ou le mot de passe est incorrecte")
+        } else {
+          alert("L'identifiant ou le mot de passe est incorrecte");
         }
       });
   }

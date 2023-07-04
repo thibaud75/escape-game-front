@@ -4,30 +4,28 @@ import LogoEscape from "./Logo";
 import { Outlet, Link } from "react-router-dom";
 import { Route, useLocation, useNavigate } from "react-router-dom";
 import { accountService } from "../_services/account.service";
+import { UserDataContext } from "../pages/UserDataContext";
 import "./Nav.css";
+import React, { useContext } from "react";
 
 export default function Nav() {
   const [isConnect, setIsConnect] = useState(accountService.isLogged());
-  const [dataUser, setDataUser] = useState<string[]>([]);
+  const { userData, updateUserData } = useContext(UserDataContext);
 
-  const getUserData = () => {
-    fetch("http://localhost:3000/auth/infos/" + localStorage.getItem("userId"))
-      .then((response) => response.json())
-      .then((data) => {
-        setDataUser(data);
-      });
-  };
-
-  useEffect(() => {
-    getUserData();
-  }, []);
-
-  console.log(dataUser);
+  console.log(userData);
   const navigate = useNavigate();
 
-  function onConnexion() {
+  function onDeconnexion() {
     accountService.logout();
     setIsConnect(false);
+    updateUserData({
+      name: "",
+      email: "",
+      lastname: "",
+      birthday: "",
+      date: "",
+      role: "",
+    });
   }
 
   function onHistory() {
@@ -54,7 +52,7 @@ export default function Nav() {
       )}
       <div className="droite">
         <span>
-          {isConnect == true && dataUser.role === "admin" ? (
+          {isConnect == true && userData.role === "admin" ? (
             <div>
               <button
                 id="history"
@@ -75,7 +73,7 @@ export default function Nav() {
                 Historique
               </button>
             </div>
-          ) : isConnect === true && dataUser.role !== "admin" ? (
+          ) : isConnect === true && userData.role !== "admin" ? (
             <button
               id="history"
               onClick={() => {
@@ -90,15 +88,16 @@ export default function Nav() {
           )}
         </span>
         {useLocation().pathname != "/auth" && (
-          <button
-            className="navBtn"
-            id="connexion"
-            onClick={() => {
-              onConnexion();
-            }}
-          >
+          <button className="navBtn" id="connexion">
             {isConnect == true ? (
-              <Link to="/">Déconnexion</Link>
+              <Link
+                onClick={() => {
+                  onDeconnexion();
+                }}
+                to="/"
+              >
+                Déconnexion
+              </Link>
             ) : (
               <Link to="/auth">Connexion</Link>
             )}
