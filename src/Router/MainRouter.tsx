@@ -8,6 +8,7 @@ import History from "../pages/History";
 import App from "../App";
 import SuccesOrder from "../pages/SuccesOrder";
 import Admin from "../pages/admin/Home";
+import NotFound from "../pages/NotFound";
 
 export default function MainRouter() {
   return (
@@ -21,6 +22,7 @@ export default function MainRouter() {
         <Route path="/history" element={<History />} />
         <Route path="/succesOrder/:id" element={<SuccesOrder />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
