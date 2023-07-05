@@ -15,29 +15,41 @@ interface Game {
 const Game = () => {
   const { id } = useParams<{ id: string }>(); // Récupère l'ID depuis l'URL
   const [game, setGame] = useState<Game>(); // Ne pas laisser les parenthèses vides
+  const [errorApi, setErrorApi] = useState<boolean>(false)
 
   useEffect(() => {
     fetch("http://localhost:3000/games/" + id)
       .then((response) => response.json())
       .then((data) => {
         setGame(data);
-        // console.log(data);
+      })
+      .catch(function(error){
+        console.log(error)
+        setErrorApi(true)
       });
   }, []);
 
   return (
     <div>
       <Nav />
-      <div className="pageGame">
-        {game && (
-          <div className="gameOne">
-            <img className="imgGame" src={game.image} alt={game.name} />
-            <h2 className="titre">{game.name}</h2>
-            <p className="description">{game.description}</p>
+      {errorApi ? (<div className="error"><h1>Sorry, le Loup de valmorel à mangé tous les cables !</h1>
+        <img src="../src/images/grandMechantLoup.jpeg" /> </div>) : 
+        (
+          <>
+          <div className="pageGame">
+            {game && (
+              <div className="gameOne">
+                <img className="imgGame" src={game.image} alt={game.name} />
+                <h2 className="titre">{game.name}</h2>
+                <p className="description">{game.description}</p>
+              </div>
+            )}
           </div>
-        )}
-      </div>
-      <MyCalendar />
+          <MyCalendar />
+          </>
+
+          )}
+        
       <Footer />
     </div>
   );

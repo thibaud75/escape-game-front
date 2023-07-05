@@ -23,6 +23,7 @@ interface Game {
 
 const Booking = () => {
   const navigate = useNavigate();
+  const [errorApi, setErrorApi] = useState<boolean>(false)
   const { id: gameId } = useParams<{ id: string }>();
   const bookingId = window.location.pathname.split("/")[4];
   const url = decodeURIComponent(bookingId);
@@ -132,6 +133,9 @@ const Booking = () => {
       .then((response) => response.json())
       .then((data) => {
         setGame(data);
+      }).catch(function(error){
+        console.log(error)
+        setErrorApi(true)
       });
   }, [gameId]);
 
@@ -267,6 +271,9 @@ const Booking = () => {
   return (
     <div>
       <Nav />
+      {errorApi ? (<div className="error"><h1>Sorry, le Loup de valmorel à mangé tous les cables !</h1>
+        <img src="/src/images/grandMechantLoup.jpeg" /> </div>) : 
+        (
       <div className="pageBooking">
         {game && (
           <div className="div2">
@@ -310,6 +317,7 @@ const Booking = () => {
           </div>
         )}
       </div>
+        )}
       <Footer />
     </div>
   );
