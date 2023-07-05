@@ -166,7 +166,7 @@ const History = () => {
                       ))}
                     </ul>
                   </div>
-                  <div>
+                  <div className="eventAndDelete">
                     <span
                       className={getClassNameForDate(
                         elem.disponibility[0].date
@@ -180,8 +180,11 @@ const History = () => {
                       {isDatePassed(elem.disponibility[0].date) ? (
                         ""
                       ) : (
-                        <button onClick={() => deleteReservation(elem.id)}>
-                          DELETE
+                        <button
+                          className="deleteButton"
+                          onClick={() => deleteReservation(elem.id)}
+                        >
+                          Annuler
                         </button>
                       )}
                     </span>

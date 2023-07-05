@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 5em;
+  margin-top: 3em;
   margin-bottom: 35vh;
 }
 
@@ -56,6 +56,12 @@ li {
 
 .red {
   color: rgb(255 0 0);
+}
+
+.eventAndDelete{
+  display: flex;
+  flex-direction: column;
+  align-content: start;
 }
 
 @media screen and (max-width: 900px) {

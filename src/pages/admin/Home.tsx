@@ -165,8 +165,11 @@ const Home = () => {
                   ))}
                 </td>
                 <td>
-                  <button onClick={() => deleteReservation(item.id)}>
-                    DELETE
+                  <button
+                    className="deleteButtonAdmin"
+                    onClick={() => deleteReservation(item.id)}
+                  >
+                    Supprimer
                   </button>
                 </td>
               </tr>
