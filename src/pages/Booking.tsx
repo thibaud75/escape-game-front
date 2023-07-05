@@ -117,7 +117,16 @@ const Booking = () => {
       }})
     return adulteOrNot
   }
-  
+  const isMore10y =()=>{
+    const allAges : number[] = allAge()
+    let more10 = false
+    allAges.forEach(elem => {
+      if (elem>=10){
+        more10 = true
+      }})
+    return more10
+  }
+
   useEffect(() => {
     fetch(`http://localhost:3000/games/${gameId}`)
       .then((response) => response.json())
@@ -204,7 +213,7 @@ const Booking = () => {
         userId: localStorage.getItem("userId"),
         id: uuidv4(),
       },
-    };if (isAdult()){
+    };if (isAdult() && isMore10y()){
 
       fetch("http://localhost:3000/disponibility/reserveform", {
         method: "POST",
@@ -238,7 +247,7 @@ const Booking = () => {
         }
       });
     }else{
-      alert('Au moins une personne doit avoir plus de 18 ans')
+      alert('Au moins une personne doit avoir plus de 18 ans et tous les utilisateurs doivent avoir plus de 10 ans')
     }
   };
 
