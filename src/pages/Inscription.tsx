@@ -95,7 +95,7 @@ function Auth() {
 
         <input
           className="inputName"
-          type="text"
+          type="password"
           placeholder="Mot de passe"
           name="password"
         ></input>

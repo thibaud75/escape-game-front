@@ -72,7 +72,7 @@ function Auth() {
           className="inputEmail"
         ></input>
         <input
-          type="text"
+          type="password"
           placeholder="Mot de passe"
           name="password"
           className="inputPassword"
