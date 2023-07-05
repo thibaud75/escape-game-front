@@ -1,3 +1,19 @@
 .droite {
   display: flex;
 }
+
+.UserNameTitle{
+  margin: auto;
+}
+
+@media screen and (max-width: 900px) {
+    .droite{
+      flex-direction: column;
+    }
+
+    .droiteMini{
+      display: flex;
+      flex-direction: column;
+    }
+
+  }

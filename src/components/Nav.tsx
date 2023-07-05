@@ -51,29 +51,17 @@ export default function Nav() {
         </h1>
       )}
       <div className="droite">
-        <span>
-          {isConnect == true && userData.role === "admin" ? (
-            <div>
-              <button
-                id="history"
-                onClick={() => {
-                  onAdmin();
-                }}
-                className="navBtn"
-              >
-                Admin
-              </button>
-              <button
-                id="history"
-                onClick={() => {
-                  onHistory();
-                }}
-                className="navBtn"
-              >
-                Historique
-              </button>
-            </div>
-          ) : isConnect === true && userData.role !== "admin" ? (
+        {isConnect == true && userData.role === "admin" ? (
+          <div className="droiteMini">
+            <button
+              id="history"
+              onClick={() => {
+                onAdmin();
+              }}
+              className="navBtn"
+            >
+              Admin
+            </button>
             <button
               id="history"
               onClick={() => {
@@ -83,10 +71,20 @@ export default function Nav() {
             >
               Historique
             </button>
-          ) : (
-            ""
-          )}
-        </span>
+          </div>
+        ) : isConnect === true && userData.role !== "admin" ? (
+          <button
+            id="history"
+            onClick={() => {
+              onHistory();
+            }}
+            className="navBtn"
+          >
+            Historique
+          </button>
+        ) : (
+          ""
+        )}
         {useLocation().pathname != "/auth" && (
           <button className="navBtn" id="connexion">
             {isConnect == true ? (
