@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./MyCalendar.css";
 import { Outlet, Link, useParams, useNavigate } from "react-router-dom";
 import { accountService } from "../_services/account.service";
+import { UserDataContext } from "../pages/UserDataContext";
+import { v4 as uuidv4 } from "uuid";
 
 interface CreneauxHorraire {
   date: string;
@@ -9,6 +11,7 @@ interface CreneauxHorraire {
 }
 
 const MyCalendar = () => {
+  const { userData } = useContext(UserDataContext);
   const { id } = useParams<{ id: string }>(); // Récupère l'ID depuis l'URL
   const navigate = useNavigate();
 
@@ -43,6 +46,7 @@ const MyCalendar = () => {
   const [buttonStates, setButtonStates] = useState<boolean[]>(
     Array(14).fill(false)
   );
+  const [gameName, setGameName] = useState<string>("");
 
   let tableOfAllDate: string[] = [];
   futureDates.forEach((elem) => {
@@ -59,18 +63,25 @@ const MyCalendar = () => {
     setSelectedDate((prevDate) => (prevDate === date ? "" : date));
   };
 
-  useEffect(() => {
+  const getDates = () => {
     fetch("http://localhost:3000/disponibility/getdates/" + id)
       .then((response) => response.json())
       .then((data) => {
         const dates = data.map((element: any) => element.disponibility[0].date);
         setArrayPush(dates);
+        const gameName = data[0]?.gameName || "";
+        setGameName(gameName);
       })
       .catch((error) => {
         console.log("Erreur de date", error);
       });
+  };
+
+  useEffect(() => {
+    getDates();
   }, []);
 
+  console.log(gameName);
   useEffect(() => {
     const initialButtonStates = tableOfAllDate.map((date) =>
       arrayPush.includes(date)
@@ -79,6 +90,56 @@ const MyCalendar = () => {
   }, [arrayPush]);
 
   console.log(arrayPush);
+
+  const closeRoom = (date: string) => {
+    const formattedString =
+      date.charAt(0).toUpperCase() + date.slice(1).toLowerCase();
+    console.log(formattedString);
+    const body = {
+      dispo: {
+        gameId: id,
+        gameName: gameName,
+        disponibility: [
+          {
+            date: formattedString,
+            users: { Prenom: "Admin", Nom: "Admin", Date: "1982-01-01" },
+          },
+        ],
+        userId: localStorage.getItem("userId"),
+        id: uuidv4(),
+      },
+    };
+
+    fetch("http://localhost:3000/disponibility/reserveform", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + accountService.getToken(),
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then((response) => {
+      if (response.ok === false) {
+        alert(
+          "Vous n'êtes pas autorisé à fermer une salle. Plus d'informations: " +
+            "statut: " +
+            response.statusText +
+            " erreur " +
+            response.status
+        );
+      } else {
+        response
+          .json()
+          .then((data) => {
+            console.log(response);
+            console.log(data);
+            getDates();
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    });
+  };
 
   return (
     <div className="pageCalendar">
@@ -120,7 +181,29 @@ const MyCalendar = () => {
           );
         })}
       </ul>
-      {selectedDate && (
+      {selectedDate && userData.role === "admin" ? (
+        <>
+          <button
+            className="buttonSubmit"
+            onClick={() => {
+              if (accountService.isLogged()) {
+                navigate(`/game/${id}/booking/${selectedDate}`);
+              } else {
+                alert("Veuillez vous connecter avant de réserver une salle !");
+              }
+            }}
+          >
+            <span>Réserver</span>
+          </button>
+          <button
+            onClick={() => {
+              closeRoom(selectedDate);
+            }}
+          >
+            Fermer la salle
+          </button>
+        </>
+      ) : selectedDate ? (
         <button
           className="buttonSubmit"
           onClick={() => {
@@ -133,9 +216,8 @@ const MyCalendar = () => {
         >
           <span>Réserver</span>
         </button>
-      )}
+      ) : null}
     </div>
   );
 };
-
 export default MyCalendar;

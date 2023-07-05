@@ -23,7 +23,7 @@ interface Game {
 
 const Booking = () => {
   const navigate = useNavigate();
-  const [errorApi, setErrorApi] = useState<boolean>(false)
+  const [errorApi, setErrorApi] = useState<boolean>(false);
   const { id: gameId } = useParams<{ id: string }>();
   const bookingId = window.location.pathname.split("/")[4];
   const url = decodeURIComponent(bookingId);
@@ -52,90 +52,93 @@ const Booking = () => {
 
   console.log(participantData);
 
-  const getAlldate = () =>{
-    let allDate : string[]= []
-    participantData.forEach((element, index)=>{
-          allDate.push(element.Date)
-    })
-    console.log(allDate, 'test11')
-    return allDate
-  }
+  const getAlldate = () => {
+    let allDate: string[] = [];
+    participantData.forEach((element, index) => {
+      allDate.push(element.Date);
+    });
+    console.log(allDate, "test11");
+    return allDate;
+  };
 
-  function calculerAge(dateNaissance:Date) {
-
+  function calculerAge(dateNaissance: Date) {
     var dateActuelle = new Date();
     var anneeActuelle = dateActuelle.getFullYear();
     var moisActuel = dateActuelle.getMonth() + 1; // les mois sont indexés à partir de 0
     var jourActuel = dateActuelle.getDate();
-  
+
     var anneeNaissance = dateNaissance.getFullYear();
     var moisNaissance = dateNaissance.getMonth() + 1;
     var jourNaissance = dateNaissance.getDate();
-  
+
     var age = anneeActuelle - anneeNaissance;
-  
+
     // Vérifier si l'anniversaire de la personne est déjà passé cette année
-    if (moisActuel < moisNaissance || (moisActuel === moisNaissance && jourActuel < jourNaissance)) {
+    if (
+      moisActuel < moisNaissance ||
+      (moisActuel === moisNaissance && jourActuel < jourNaissance)
+    ) {
       age--;
     }
-  
+
     return age;
   }
-  
-  const allAge = () =>{
 
-    const alldate = getAlldate()
-    const allAge : number[]= []
+  const allAge = () => {
+    const alldate = getAlldate();
+    const allAge: number[] = [];
 
-    alldate.forEach((elem =>{
-      console.log(elem)
-      const annee = parseInt(elem.split("-")[0])
-      const mois = parseInt(elem.split("-")[1])
-      const jour = parseInt(elem.split("-")[2])
+    alldate.forEach((elem) => {
+      console.log(elem);
+      const annee = parseInt(elem.split("-")[0]);
+      const mois = parseInt(elem.split("-")[1]);
+      const jour = parseInt(elem.split("-")[2]);
 
-      console.log(annee, 'ANNEE')
-      console.log(mois, 'MOIS')
-      console.log(jour, 'JOUR')
+      console.log(annee, "ANNEE");
+      console.log(mois, "MOIS");
+      console.log(jour, "JOUR");
 
-      const dateNaissance = new Date(annee, mois, jour); 
-      console.log(dateNaissance, 'DATE DE NAISSANCE')
+      const dateNaissance = new Date(annee, mois, jour);
+      console.log(dateNaissance, "DATE DE NAISSANCE");
       const age = calculerAge(dateNaissance);
       console.log(age);
-      allAge.push(age)
-      console.log(allAge)
+      allAge.push(age);
+      console.log(allAge);
+    });
 
-    }))
+    return allAge;
+  };
 
-    return allAge
-  }
-
-  const isAdult =()=>{
-    const allAges : number[] = allAge()
-    let adulteOrNot = false
-    allAges.forEach(elem => {
-      if (elem>=18){
-        adulteOrNot = true
-      }})
-    return adulteOrNot
-  }
-  const isMore10y =()=>{
-    const allAges : number[] = allAge()
-    let more10 = false
-    allAges.forEach(elem => {
-      if (elem>=10){
-        more10 = true
-      }})
-    return more10
-  }
+  const isAdult = () => {
+    const allAges: number[] = allAge();
+    let adulteOrNot = false;
+    allAges.forEach((elem) => {
+      if (elem >= 18) {
+        adulteOrNot = true;
+      }
+    });
+    return adulteOrNot;
+  };
+  const isMore10y = () => {
+    const allAges: number[] = allAge();
+    let more10 = false;
+    allAges.forEach((elem) => {
+      if (elem >= 10) {
+        more10 = true;
+      }
+    });
+    return more10;
+  };
 
   useEffect(() => {
     fetch(`http://localhost:3000/games/${gameId}`)
       .then((response) => response.json())
       .then((data) => {
         setGame(data);
-      }).catch(function(error){
-        console.log(error)
-        setErrorApi(true)
+      })
+      .catch(function (error) {
+        console.log(error);
+        setErrorApi(true);
       });
   }, [gameId]);
 
@@ -217,8 +220,8 @@ const Booking = () => {
         userId: localStorage.getItem("userId"),
         id: uuidv4(),
       },
-    };if (isAdult() && isMore10y()){
-
+    };
+    if (isAdult() && isMore10y()) {
       fetch("http://localhost:3000/disponibility/reserveform", {
         method: "POST",
         headers: {
@@ -250,8 +253,10 @@ const Booking = () => {
             });
         }
       });
-    }else{
-      alert('Au moins une personne doit avoir plus de 18 ans et tous les utilisateurs doivent avoir plus de 10 ans')
+    } else {
+      alert(
+        "Au moins une personne doit avoir plus de 18 ans et tous les utilisateurs doivent avoir plus de 10 ans"
+      );
     }
   };
 
@@ -271,53 +276,59 @@ const Booking = () => {
   return (
     <div>
       <Nav />
-      {errorApi ? (<div className="error"><h1>Sorry, le Loup de valmorel à mangé tous les cables !</h1>
-        <img src="/src/images/grandMechantLoup.jpeg" /> </div>) : 
-        (
-      <div className="pageBooking">
-        {game && (
-          <div className="div2">
-            <div className="textDescBooking">
-              <img className="imgBooking" src={game.image} alt={game.name} />
-              <p className="reserv-date">
-                Vous allez réserver la salle {game.name} le {formattedString}
-              </p>
-              <p className="reserv-capacity">
-                Le nombre de participants doit être compris entre{" "}
-                {` ${game.capacity[0]} et ${
-                  game.capacity[game.capacity.length - 1]
-                }`}
-              </p>
-            </div>
-            <select value={participants} onChange={handleParticipantsChange}>
-              <option value="">Nombre de participants</option>
-              {game.capacity.map((capacity, index) => (
-                <option key={index} value={capacity}>
-                  {capacity}
-                </option>
-              ))}
-            </select>
-            <form className="formBooking" onSubmit={(e) => e.preventDefault()}>
-              {gameForms}
-              
-            <div>
-              <button
-                className="buttonSubmit"
-                type="submit"
-                onClick={() => {
-                  accountService.isLogged()
-                    ? handleSubmit()
-                    : alert("Veuillez vous connecter!");
-                }}
+      {errorApi ? (
+        <div className="error">
+          <h1>Sorry, le Loup de valmorel à mangé tous les cables !</h1>
+          <img src="/src/images/grandMechantLoup.jpeg" />{" "}
+        </div>
+      ) : (
+        <div className="pageBooking">
+          {game && (
+            <div className="div2">
+              <div className="textDescBooking">
+                <img className="imgBooking" src={game.image} alt={game.name} />
+                <p className="reserv-date">
+                  Vous allez réserver la salle {game.name} le {formattedString}
+                </p>
+                <p className="reserv-capacity">
+                  Le nombre de participants doit être compris entre{" "}
+                  {` ${game.capacity[0]} et ${
+                    game.capacity[game.capacity.length - 1]
+                  }`}
+                </p>
+              </div>
+              <select value={participants} onChange={handleParticipantsChange}>
+                <option value="">Nombre de participants</option>
+                {game.capacity.map((capacity, index) => (
+                  <option key={index} value={capacity}>
+                    {capacity}
+                  </option>
+                ))}
+              </select>
+              <form
+                className="formBooking"
+                onSubmit={(e) => e.preventDefault()}
               >
-                <span>Réserver</span>
-              </button>
+                {gameForms}
+
+                <div>
+                  <button
+                    className="buttonSubmit"
+                    type="submit"
+                    onClick={() => {
+                      accountService.isLogged()
+                        ? handleSubmit()
+                        : alert("Veuillez vous connecter!");
+                    }}
+                  >
+                    <span>Réserver</span>
+                  </button>
+                </div>
+              </form>
             </div>
-            </form>
-          </div>
-        )}
-      </div>
-        )}
+          )}
+        </div>
+      )}
       <Footer />
     </div>
   );
