@@ -18,7 +18,7 @@ function App() {
 
   const getGames = () => {
     fetch("http://localhost:3000/games") // on récupere toute la data de la route game qui possede nos images et ces infos.
-      .then((response) => response.json()) 
+      .then((response) => response.json())
       .then((data) => {
         const gameAvailable = data.filter((elem) => elem.available === true);
         setGame(gameAvailable);
@@ -63,7 +63,8 @@ function App() {
             Bienvenue sur le site de réservation d'<em>Escape Game</em> !
           </h1>
           <div className="gamesAll">
-            {game.map((elem, index) => { // une boucle pour afficher chaque element et Link pour rediriger vers la page suivante
+            {game.map((elem, index) => {
+              // une boucle pour afficher chaque element et Link pour rediriger vers la page suivante
               return (
                 <React.Fragment key={index}>
                   {/* <div> */}

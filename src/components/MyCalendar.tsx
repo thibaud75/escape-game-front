@@ -47,6 +47,7 @@ const MyCalendar = () => {
     Array(14).fill(false)
   );
   const [gameName, setGameName] = useState<string>("");
+  const [errorApi, setErrorApi] = useState<boolean>(false);
 
   let tableOfAllDate: string[] = [];
   futureDates.forEach((elem) => {
@@ -69,13 +70,25 @@ const MyCalendar = () => {
       .then((data) => {
         const dates = data.map((element: any) => element.disponibility[0].date);
         setArrayPush(dates);
-        const gameName = data[0]?.gameName || "";
-        setGameName(gameName);
       })
       .catch((error) => {
         console.log("Erreur de date", error);
       });
   };
+
+  useEffect(() => {
+    fetch("http://localhost:3000/games/" + id)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        const gameName = data.name;
+        setGameName(gameName);
+      })
+      .catch(function (error) {
+        console.log(error);
+        setErrorApi(true);
+      });
+  }, []);
 
   useEffect(() => {
     getDates();
