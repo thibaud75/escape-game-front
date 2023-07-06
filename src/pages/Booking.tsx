@@ -36,11 +36,12 @@ const Booking = () => {
   const [participantData, setParticipantData] = useState<any[]>([]);
   const nameRegex = /^[a-zA-ZÀ-ÿ\-']+$/;
 
-  const handleParticipantInputChange = ( // fonction qui recupere les données des participants via l'input et les inserts dans 
+  const handleParticipantInputChange = (
+    // fonction qui recupere les données des participants via l'input et les inserts dans
     index: number, // ParticipantData
     data: ParticipantData
   ) => {
-    setParticipantData((prevData) => { 
+    setParticipantData((prevData) => {
       const newData = [...prevData];
       newData[index] = {
         ...newData[index],
@@ -306,10 +307,10 @@ const Booking = () => {
                 ))}
               </select>
               <form
-                className="formBooking"
+                className="formBookingAll"
                 onSubmit={(e) => e.preventDefault()}
               >
-                {gameForms}
+                <div className="formBooking">{gameForms}</div>
 
                 <div>
                   <button

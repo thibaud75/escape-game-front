@@ -67,6 +67,7 @@ header {
   background-color: #0C2340;
   color: white;
   align-items: center;
+  z-index: 2;
 }
 
 .logo {

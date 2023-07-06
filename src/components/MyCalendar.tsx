@@ -196,11 +196,12 @@ const MyCalendar = () => {
             <span>Réserver</span>
           </button>
           <button
+            className="deleteButtonAdmin"
             onClick={() => {
               closeRoom(selectedDate);
             }}
           >
-            Fermer la salle
+            Fermer le créneau
           </button>
         </>
       ) : selectedDate ? (

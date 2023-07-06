@@ -11,6 +11,24 @@
     border-radius: .5em;
 }
 
+.formBookingAll{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formBooking{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1E2952;
+    color: white;
+    padding: 1em;
+    border-radius: 0.5em;
+    width: fit-content;
+    box-shadow: 10px 10px 8px #273a81;
+}
+
 .div2{
     display: flex;
     flex-direction: column;
@@ -18,12 +36,11 @@
     align-items: center;
 }
 
-  input{
+input{
     height: 3em;
     border: none;
     border-radius: .5em;
-    box-shadow:  5px 5px 15px rgb(2, 2, 156),
-               -5px -5px 15px rgb(0, 0, 218);}
+}
 
 select{
     height: 3em;
