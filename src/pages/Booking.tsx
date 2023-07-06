@@ -25,10 +25,10 @@ const Booking = () => {
   const navigate = useNavigate();
   const [errorApi, setErrorApi] = useState<boolean>(false);
   const { id: gameId } = useParams<{ id: string }>();
-  const bookingId = window.location.pathname.split("/")[4];
+  const bookingId = window.location.pathname.split("/")[4]; // on divise l'url et on recupere le 4eme element ( la date )
   const url = decodeURIComponent(bookingId);
   const formattedString =
-    url.charAt(0).toUpperCase() + url.slice(1).toLowerCase();
+    url.charAt(0).toUpperCase() + url.slice(1).toLowerCase(); // on formate la date pour qu'elle corresponde au format de la bdd
   console.log(formattedString);
 
   const [game, setGame] = useState<Game | null>(null);
@@ -36,11 +36,11 @@ const Booking = () => {
   const [participantData, setParticipantData] = useState<any[]>([]);
   const nameRegex = /^[a-zA-ZÀ-ÿ\-']+$/;
 
-  const handleParticipantInputChange = (
-    index: number,
+  const handleParticipantInputChange = ( // fonction qui recupere les données des participants via l'input et les inserts dans 
+    index: number, // ParticipantData
     data: ParticipantData
   ) => {
-    setParticipantData((prevData) => {
+    setParticipantData((prevData) => { 
       const newData = [...prevData];
       newData[index] = {
         ...newData[index],

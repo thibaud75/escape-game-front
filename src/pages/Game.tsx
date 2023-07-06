@@ -14,14 +14,14 @@ interface Game {
 
 const Game = () => {
   const { id } = useParams<{ id: string }>(); // Récupère l'ID depuis l'URL
-  const [game, setGame] = useState<Game>(); // Ne pas laisser les parenthèses vides
+  const [game, setGame] = useState<Game>(); 
   const [errorApi, setErrorApi] = useState<boolean>(false)
 
   useEffect(() => {
     fetch("http://localhost:3000/games/" + id)
       .then((response) => response.json())
       .then((data) => {
-        setGame(data);
+        setGame(data); // on récupère toute la data d'un seul game selon l'ID
       })
       .catch(function(error){
         console.log(error)
