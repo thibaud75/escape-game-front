@@ -3,9 +3,6 @@ input{
     margin: 1em;
     margin-bottom:3%;
     height: 3em;
-    border: none;
-    box-shadow:  5px 5px 15px #1b2549,
-    -5px -5px 15px #243263;
 }
 
 .PlayerPlusDate{
