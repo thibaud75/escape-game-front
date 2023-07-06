@@ -55,7 +55,7 @@ const Booking = () => {
 
   const getAlldate = () => {
     let allDate: string[] = [];
-    participantData.forEach((element, index) => {
+    participantData.forEach((element, index) => { // récupère toute les dates de naissances de chaque user
       allDate.push(element.Date);
     });
     console.log(allDate, "test11");
@@ -93,7 +93,7 @@ const Booking = () => {
       console.log(elem);
       const annee = parseInt(elem.split("-")[0]);
       const mois = parseInt(elem.split("-")[1]);
-      const jour = parseInt(elem.split("-")[2]);
+      const jour = parseInt(elem.split("-")[2]); // on découpe la date de naissance pour la fonction Date()
 
       console.log(annee, "ANNEE");
       console.log(mois, "MOIS");
@@ -101,7 +101,7 @@ const Booking = () => {
 
       const dateNaissance = new Date(annee, mois, jour);
       console.log(dateNaissance, "DATE DE NAISSANCE");
-      const age = calculerAge(dateNaissance);
+      const age = calculerAge(dateNaissance); // on récupère tout les ages en années
       console.log(age);
       allAge.push(age);
       console.log(allAge);
@@ -113,22 +113,22 @@ const Booking = () => {
   const isAdult = () => {
     const allAges: number[] = allAge();
     let adulteOrNot = false;
-    allAges.forEach((elem) => {
+    allAges.forEach((elem) => { // on regarde si une des personnes qui participe au game est majeur ou non
       if (elem >= 18) {
         adulteOrNot = true;
       }
     });
     return adulteOrNot;
   };
-  const isMore10y = () => {
+  const isLess10y = () => {
     const allAges: number[] = allAge();
-    let more10 = false;
+    let less10 = false;
     allAges.forEach((elem) => {
-      if (elem >= 10) {
-        more10 = true;
+      if (elem < 10) {
+        less10 = true;
       }
     });
-    return more10;
+    return less10;
   };
 
   useEffect(() => {
@@ -222,7 +222,7 @@ const Booking = () => {
         id: uuidv4(),
       },
     };
-    if (isAdult() && isMore10y()) {
+    if (isAdult() && !isLess10y()) {
       fetch("http://localhost:3000/disponibility/reserveform", {
         method: "POST",
         headers: {
